@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📧 Email Scraper & Campaign Manager</title>
+    <title>📧 Email Campaign Manager - Professional Email Marketing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,255 +12,397 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #667eea;
+            --primary-dark: #764ba2;
+            --secondary: #f093fb;
+            --accent: #4facfe;
+            --success: #43e97b;
+            --danger: #f5576c;
+            --warning: #ff9800;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .tab-btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
-        }
-
-        .tab-btn.active {
+        /* ========== NAVBAR ========== */
+        nav {
             background: white;
-            color: #667eea;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .tab-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .tab-content {
-            display: none;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .tab-content.active {
-            display: block;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
 
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ========== CONTAINER & LAYOUT ========== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-title {
+            font-size: 0.9rem;
+            color: var(--dark);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-item {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--dark);
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-item:hover,
+        .sidebar-item.active {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            color: var(--primary);
+            border-left-color: var(--primary);
+        }
+
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* ========== CARDS & COMPONENTS ========== */
         .card {
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .card h2 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .input-group {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .input-group input,
-        .input-group textarea,
-        .input-group select {
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        /* ========== FORMS & INPUTS ========== */
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        input, textarea, select {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--light);
             border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s;
+            font-size: 1rem;
             font-family: inherit;
+            transition: var(--transition);
         }
 
-        .input-group input:focus,
-        .input-group textarea:focus,
-        .input-group select:focus {
+        input:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .input-group input[type="text"],
-        .input-group input[type="email"],
-        .input-group input[type="password"],
-        .input-group input[type="url"] {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .input-group textarea {
-            width: 100%;
-            min-height: 120px;
+        textarea {
             resize: vertical;
+            min-height: 120px;
         }
 
-        .button-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        button {
-            padding: 12px 25px;
+        /* ========== BUTTONS ========== */
+        .btn {
+            padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 8px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s;
+            font-size: 1rem;
             font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             flex: 1;
             min-width: 150px;
+            justify-content: center;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
         }
 
         .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
-            padding: 12px 20px;
+            background: var(--light);
+            color: var(--dark);
+            border: 2px solid var(--light);
         }
 
         .btn-secondary:hover {
-            background: #e0e0e0;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
+            background: transparent;
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
         .btn-success {
-            background: #4caf50;
+            background: var(--success);
             color: white;
         }
 
         .btn-success:hover {
-            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(67, 233, 123, 0.3);
         }
 
-        .loading {
-            text-align: center;
-            padding: 30px;
-            color: #667eea;
-            display: none;
+        .btn-danger {
+            background: var(--danger);
+            color: white;
         }
 
-        .loading.active {
-            display: block;
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.3);
         }
 
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* ========== STATS & INFO ========== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .message {
-            padding: 15px;
+        .stat-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
             border-radius: 8px;
-            margin-bottom: 20px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* ========== MESSAGES ========== */
+        .message {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
             display: none;
+            border-left: 4px solid;
+            animation: slideIn 0.3s ease;
         }
 
         .message.active {
             display: block;
         }
 
-        .error {
-            background: #ffebee;
-            color: #c62828;
-            border-left: 4px solid #c62828;
+        .message.success {
+            background: rgba(67, 233, 123, 0.1);
+            color: var(--success);
+            border-left-color: var(--success);
         }
 
-        .success {
-            background: #e8f5e9;
-            color: #2e7d32;
-            border-left: 4px solid #2e7d32;
+        .message.error {
+            background: rgba(245, 87, 108, 0.1);
+            color: var(--danger);
+            border-left-color: var(--danger);
         }
 
-        .info {
-            background: #e3f2fd;
-            color: #1565c0;
-            border-left: 4px solid #1565c0;
+        .message.info {
+            background: rgba(79, 172, 254, 0.1);
+            color: var(--accent);
+            border-left-color: var(--accent);
         }
 
-        .results-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
+        @keyframes slideIn {
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
-        .results-count {
-            font-size: 1.1em;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .results-count span {
-            color: #667eea;
-        }
-
+        /* ========== TABLES ========== */
         .table-wrapper {
             overflow-x: auto;
         }
@@ -267,1414 +410,1064 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
 
         table thead {
-            background: #f8f9fa;
+            background: var(--light);
             border-bottom: 2px solid #e0e0e0;
         }
 
         table th {
-            padding: 15px;
+            padding: 1rem;
             text-align: left;
             font-weight: 600;
-            color: #333;
+            color: var(--dark);
         }
 
         table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem;
+            border-bottom: 1px solid var(--light);
         }
 
         table tbody tr:hover {
-            background: #f8f9fa;
+            background: var(--light);
         }
 
-        table tbody tr:nth-child(even) {
-            background: #fafafa;
-        }
-
-        .email-cell {
-            color: #667eea;
-            word-break: break-all;
-        }
-
-        .action-btn {
-            background: #e0e0e0;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: all 0.3s;
-        }
-
-        .action-btn:hover {
-            background: #667eea;
+        /* ========== PREMIUM BADGE ========== */
+        .premium-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
             color: white;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 40px 20px;
-            color: #999;
-            font-size: 1.1em;
-        }
-
-        .email-draft {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            line-height: 1.6;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .form-row.full {
-            grid-template-columns: 1fr;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            margin-bottom: 8px;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: #333;
+            margin-left: 1rem;
         }
 
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            padding: 10px 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
-            font-size: 0.95em;
-            transition: border-color 0.3s;
+        /* ========== SEARCH LIMIT INDICATOR ========== */
+        .search-limit {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--warning);
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
+        .limit-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 0.5rem;
         }
 
-        .send-results {
-            margin-top: 20px;
+        .limit-fill {
+            background: linear-gradient(90deg, var(--danger) 0%, var(--warning) 100%);
+            height: 100%;
+            transition: var(--transition);
         }
 
-        .send-result-item {
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .send-result-item.sent {
-            background: #e8f5e9;
-            border-left: 4px solid #4caf50;
-        }
-
-        .send-result-item.failed {
-            background: #ffebee;
-            border-left: 4px solid #f44336;
-        }
-
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
-            .form-row {
+            .main-content {
                 grid-template-columns: 1fr;
             }
 
-            .tabs {
-                flex-direction: column;
+            .sidebar {
+                position: static;
+                display: flex;
+                gap: 1rem;
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 1rem;
             }
 
-            .tab-btn {
-                width: 100%;
+            .sidebar-menu {
+                flex-direction: row;
             }
 
-            table {
-                font-size: 0.9em;
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            table th, table td {
-                padding: 8px;
+            .nav-links {
+                gap: 1rem;
             }
+
+            nav .container {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* ========== LOADING ========== */
+        .spinner {
+            border: 4px solid var(--light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ========== MODALS ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-btn:hover {
+            color: var(--dark);
         }
     </style>
 </head>
 <body>
+
+<!-- ========== NAVBAR ========== -->
+<nav>
     <div class="container">
-        <div class="header">
-            <h1>📧 Email Scraper & Campaign Manager</h1>
-            <p>Extract emails, draft campaigns, and send outreach emails</p>
+        <div class="logo">📧 EmailPro</div>
+        <div class="nav-links">
+            <a onclick="switchTab('scrape')">Scraper</a>
+            <a onclick="switchTab('compose')">Composer</a>
+            <a onclick="switchTab('campaign')">Campaign</a>
         </div>
-
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('scrape', this)">🔍 Scrape Emails</button>
-            <button class="tab-btn" onclick="switchTab('compose', this)">📝 Compose Email</button>
-            <button class="tab-btn" onclick="switchTab('draft', this)">✍️ Draft Email</button>
-            <button class="tab-btn" onclick="switchTab('send', this)">📤 Send Campaign</button>
-        </div>
-
-        <!-- SCRAPE TAB -->
-        <div id="scrape" class="tab-content active">
-            <div class="card">
-                <h2>Web Scraper</h2>
-                <p style="color: #999; margin-bottom: 20px;">Extract email addresses from any website</p>
-
-                <div class="input-group">
-                    <input 
-                        type="url" 
-                        id="urlInput" 
-                        placeholder="Enter website URL (e.g., https://example.com)" 
-                        value="https://www.uc3m.es/orientacionyempleo/somos#campusgetafe"
-                    >
-                </div>
-
-                <div class="button-group">
-                    <button class="btn-primary" onclick="scrapeEmails()">Scrape Emails</button>
-                    <button class="btn-secondary" id="exportBtn" onclick="exportToCSV()" disabled>📥 Export to CSV</button>
-                    <button class="btn-secondary" onclick="clearResults()">Clear</button>
-                </div>
-
-                <div class="message error" id="errorMsg"></div>
-                <div class="message success" id="successMsg"></div>
-
-                <div class="loading" id="loading">
-                    <div class="spinner"></div>
-                    <p>Scraping website...</p>
-                </div>
-
-                <div id="results"></div>
-            </div>
-        </div>
-
-        <!-- COMPOSE EMAIL TAB -->
-        <div id="compose" class="tab-content">
-            <div class="card">
-                <h2>Compose Email by Category</h2>
-                <p style="color: #999; margin-bottom: 20px;">Select a category to get pre-formatted email templates</p>
-
-                <div class="form-group">
-                    <label>Email Category:</label>
-                    <select id="emailCategory" onchange="loadCategoryTemplate()">
-                        <option value="">-- Select Category --</option>
-                        <option value="principal">🎓 Principal/Headmaster</option>
-                        <option value="professor">👨‍🏫 Professor/Teacher</option>
-                        <option value="university">🏫 University/Institution</option>
-                        <option value="hr">💼 HR/Recruiter</option>
-                        <option value="cto">🖥️ CTO/Tech Lead</option>
-                        <option value="investor">💰 Investor/VC</option>
-                        <option value="client">🤝 Business Client</option>
-                        <option value="vendor">📦 Vendor/Supplier</option>
-                        <option value="media">📰 Media/Press</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Recipient Name:</label>
-                    <input type="text" id="recipientName" placeholder="e.g., Dr. Smith, Prof. Johnson">
-                </div>
-
-                <div class="form-group">
-                    <label>Your Purpose/Subject:</label>
-                    <input type="text" id="composePurpose" placeholder="e.g., Internship Inquiry, Partnership Proposal">
-                </div>
-
-                <div class="button-group">
-                    <button class="btn-primary" onclick="generateCategoryEmail()">Generate Email</button>
-                </div>
-
-                <div id="composeMsg" style="margin-top: 20px;"></div>
-
-                <div id="composeResult" style="margin-top: 20px;">
-                    <div id="composedEmail" class="email-draft" style="display:none; margin-top: 15px;"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DRAFT TAB -->
-        <div id="draft" class="tab-content">
-            <div class="card">
-                <h2>Email Draft Generator</h2>
-                <p style="color: #999; margin-bottom: 20px;">Generate professional email drafts</p>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Email Subject</label>
-                        <input type="text" id="emailSubject" placeholder="e.g., Partnership Opportunity">
-                    </div>
-                    <div class="form-group">
-                        <label>Target Company</label>
-                        <input type="text" id="targetCompany" placeholder="e.g., Google, Microsoft">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Email Purpose</label>
-                        <textarea id="emailPurpose" placeholder="e.g., Job inquiry, partnership proposal, sales pitch"></textarea>
-                    </div>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn-primary" onclick="generateEmailDraft()">Generate Draft</button>
-                    <button class="btn-secondary" id="saveDraftBtn" onclick="saveDraftPrompt()" disabled>💾 Save Draft</button>
-                    <button class="btn-secondary" onclick="showLoadedDrafts()">📂 Load Draft</button>
-                </div>
-
-                <div class="message error" id="draftErrorMsg"></div>
-                <div class="message success" id="draftSuccessMsg"></div>
-
-                <div class="loading" id="draftLoading">
-                    <div class="spinner"></div>
-                    <p>Generating email...</p>
-                </div>
-
-                <div id="draftResult"></div>
-                <div id="savedDraftsPanel"></div>
-            </div>
-        </div>
-
-        <!-- SEND TAB -->
-        <div id="send" class="tab-content">
-            <div class="card">
-                <h2>Send Email Campaign</h2>
-                <p style="color: #999; margin-bottom: 20px;">Send emails to multiple recipients</p>
-
-                <div class="form-row" style="grid-template-columns: 1fr;">
-                    <div class="form-group">
-                        <label>Email Recipients (comma-separated)</label>
-                        <textarea id="recipientEmails" placeholder="email1@example.com, email2@example.com, email3@example.com" style="min-height: 100px;"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Email Subject</label>
-                        <input type="text" id="sendSubject" placeholder="Email subject">
-                    </div>
-                </div>
-
-                <div class="form-row" style="grid-template-columns: 1fr;">
-                    <div class="form-group">
-                        <label>Email Body</label>
-                        <textarea id="sendBody" placeholder="Email content" style="min-height: 200px;"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Your Gmail Address</label>
-                        <input type="email" id="senderEmail" placeholder="your-email@gmail.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Gmail App Password</label>
-                        <input type="password" id="senderPassword" placeholder="App password (not regular password)">
-                    </div>
-                </div>
-
-                <div class="info message" style="display: block;">
-                    <strong>ℹ️ Note:</strong> Use Gmail App Password, not your regular password. 
-                    <a href="https://support.google.com/accounts/answer/185833" target="_blank" style="color: inherit; text-decoration: underline;">Generate one here</a>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn-primary" onclick="sendEmails()">Send Campaign</button>
-                    <button class="btn-secondary" onclick="pasteFromDraft()">📋 Use Draft</button>
-                </div>
-
-                <div class="message error" id="sendErrorMsg"></div>
-                <div class="message success" id="sendSuccessMsg"></div>
-
-                <div class="loading" id="sendLoading">
-                    <div class="spinner"></div>
-                    <p>Sending emails...</p>
-                </div>
-
-                <div class="send-results" id="sendResults"></div>
-            </div>
-        </div>
-
-        <div style="text-align: center; color: rgba(255, 255, 255, 0.8); margin-top: 30px; font-size: 0.9em;">
-            <p>Made with ❤️ using Node.js + ScrapingBee API</p>
-        </div>
-    </div>
-
-    <!-- PAYMENT MODAL -->
-    <div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
-        <div style="background: white; padding: 40px; border-radius: 15px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
-            <h2 style="color: #667eea; margin-bottom: 20px;">💳 Premium Payment</h2>
-            <p style="color: #666; margin-bottom: 20px;">Amount: <strong>Rs. 499/month</strong></p>
-            
-            <div class="form-group">
-                <label>Transaction ID (from EasyPaisa):</label>
-                <input type="text" id="transactionId" placeholder="e.g., TXN123456" style="margin-bottom: 20px;">
-            </div>
-
-            <div class="form-group">
-                <label>Your Email:</label>
-                <input type="email" id="paymentEmail" placeholder="your-email@example.com" style="margin-bottom: 20px;">
-            </div>
-
-            <div class="button-group" style="gap: 10px;">
-                <button class="btn-primary" onclick="submitPayment()" style="flex: 1;">Submit Payment</button>
-                <button class="btn-secondary" onclick="closePaymentModal()" style="flex: 1;">Cancel</button>
-            </div>
-
-            <div id="paymentMsg" style="margin-top: 15px;"></div>
-        </div>
-    </div>
-
-    <!-- ADMIN DASHBOARD -->
-    <div id="adminDashboard" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f5f5f5; z-index: 999; overflow-y: auto; padding: 20px;">
-        <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: white; padding: 20px; border-radius: 10px;">
-                <h1 style="color: #667eea;">🔐 Admin Dashboard</h1>
-                <button class="btn-secondary" onclick="logoutAdmin()" style="background: #f44336; color: white;">Logout</button>
-            </div>
-
-            <!-- Admin Tabs -->
-            <div class="tabs" style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                <button class="tab-btn active" onclick="switchAdminTab('payments', this)" style="background: white; color: #667eea; border: 2px solid #667eea;">💳 Payments</button>
-                <button class="tab-btn" onclick="switchAdminTab('stats', this)" style="background: white; color: #667eea;">📊 Statistics</button>
-                <button class="tab-btn" onclick="switchAdminTab('users', this)" style="background: white; color: #667eea;">👥 Users</button>
-            </div>
-
-            <!-- Payments Tab -->
-            <div id="adminPayments" style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                <h2 style="color: #333; margin-bottom: 20px;">Payment Requests</h2>
-                <div id="paymentsTable" style="overflow-x: auto;">
-                    <table style="width: 100%;">
-                        <thead>
-                            <tr style="background: #f8f9fa;">
-                                <th>Email</th>
-                                <th>Transaction ID</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="paymentsList"></tbody>
-                    </table>
-                </div>
-                <div id="noPayments" style="text-align: center; padding: 40px; color: #999;">No pending payments</div>
-            </div>
-
-            <!-- Stats Tab -->
-            <div id="adminStats" style="display: none; background: white; padding: 20px; border-radius: 10px;">
-                <h2 style="color: #333; margin-bottom: 20px;">📊 Statistics</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
-                        <p style="font-size: 2.5em; margin: 10px 0;" id="totalUsers">0</p>
-                        <p>Total Users</p>
-                    </div>
-                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
-                        <p style="font-size: 2.5em; margin: 10px 0;" id="pendingPayments">0</p>
-                        <p>Pending Payments</p>
-                    </div>
-                    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
-                        <p style="font-size: 2.5em; margin: 10px 0;" id="approvedPayments">0</p>
-                        <p>Approved</p>
-                    </div>
-                    <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
-                        <p style="font-size: 2.5em; margin: 10px 0;" id="totalRevenue">Rs. 0</p>
-                        <p>Total Revenue</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Users Tab -->
-            <div id="adminUsers" style="display: none; background: white; padding: 20px; border-radius: 10px;">
-                <h2 style="color: #333; margin-bottom: 20px;">👥 Active Users</h2>
-                <div id="usersList" style="overflow-x: auto;">
-                    <table style="width: 100%;">
-                        <thead>
-                            <tr style="background: #f8f9fa;">
-                                <th>Email</th>
-                                <th>Status</th>
-                                <th>Joined</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usersTable"></tbody>
-                    </table>
-                </div>
-                <div id="noUsers" style="text-align: center; padding: 40px; color: #999;">No active users</div>
+        <div class="nav-buttons">
+            <button class="btn btn-primary" onclick="openPaymentModal()" style="min-width: 120px;">💳 Premium</button>
+            <div class="user-profile" onclick="toggleUserMenu()">
+                <div class="user-avatar" id="userInitial">G</div>
+                <span id="userName">Guest</span>
             </div>
         </div>
     </div>
+</nav>
 
-    <!-- ADMIN LOGIN MODAL -->
-    <div id="adminLoginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1001; justify-content: center; align-items: center;">
-        <div style="background: white; padding: 40px; border-radius: 15px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
-            <h2 style="color: #667eea; margin-bottom: 20px;">🔐 Admin Login</h2>
-            
-            <div class="form-group">
-                <label>Password:</label>
-                <input type="password" id="adminPassword" placeholder="Enter admin password" style="margin-bottom: 20px;">
-            </div>
-
-            <div class="button-group" style="gap: 10px;">
-                <button class="btn-primary" onclick="verifyAdminPassword()" style="flex: 1;">Login</button>
-                <button class="btn-secondary" onclick="closeAdminModal()" style="flex: 1;">Cancel</button>
-            </div>
-
-            <div id="adminLoginMsg" style="margin-top: 15px;"></div>
+<!-- ========== HERO SECTION ========== -->
+<section class="hero">
+    <div class="container">
+        <h1>Professional Email Marketing Made Simple</h1>
+        <p>Scrape emails, create campaigns, and reach your audience with powerful tools built for growth</p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="scrollToContent()">Get Started</button>
+            <button class="btn btn-secondary" onclick="openGoogleAuth()"><i class="fab fa-google"></i> Sign in with Google</button>
         </div>
     </div>
+</section>
 
-    <!-- Admin Button in Header -->
-    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 100;">
-        <button onclick="openAdminPanel()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 15px 20px; border-radius: 50px; cursor: pointer; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-            🔐 Admin
-        </button>
+<!-- ========== MAIN CONTENT ========== -->
+<div class="container">
+    <div class="main-content">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar-title">Tools</div>
+            <div class="sidebar-menu">
+                <div class="sidebar-item active" onclick="switchTab('scrape')">
+                    <i class="fas fa-search"></i> Scraper
+                </div>
+                <div class="sidebar-item" onclick="switchTab('compose')">
+                    <i class="fas fa-pen"></i> Composer
+                </div>
+                <div class="sidebar-item" onclick="switchTab('campaign')">
+                    <i class="fas fa-envelope"></i> Campaign
+                </div>
+                <div class="sidebar-item" onclick="switchTab('saved')">
+                    <i class="fas fa-bookmark"></i> Saved
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <!-- SCRAPER TAB -->
+            <div id="scrape" class="tab-pane active">
+                <div class="card">
+                    <h2><i class="fas fa-search"></i> Email Scraper</h2>
+                    
+                    <!-- Search Limit Indicator -->
+                    <div class="search-limit" id="limitIndicator" style="display:none;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <strong>Daily Search Limit (Free)</strong>
+                            <span id="limitText">0/3</span>
+                        </div>
+                        <div class="limit-bar">
+                            <div class="limit-fill" id="limitFill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Website URL:</label>
+                        <input type="url" id="urlInput" placeholder="https://example.com" value="https://example.com">
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="scrapeEmails()">
+                            <i class="fas fa-search"></i> Scrape Emails
+                        </button>
+                    </div>
+
+                    <div id="scrapeMsg" class="message"></div>
+                    <div id="scrapeResults"></div>
+                </div>
+            </div>
+
+            <!-- COMPOSER TAB -->
+            <div id="compose" class="tab-pane" style="display:none;">
+                <div class="card">
+                    <h2><i class="fas fa-pen"></i> Email Composer</h2>
+                    
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <select id="emailCategory" onchange="loadCategoryTemplate()">
+                            <option value="">-- Select Category --</option>
+                            <option value="principal">🎓 Principal/Headmaster</option>
+                            <option value="professor">👨‍🏫 Professor/Teacher</option>
+                            <option value="university">🏫 University/Institution</option>
+                            <option value="hr">💼 HR/Recruiter</option>
+                            <option value="cto">🖥️ CTO/Tech Lead</option>
+                            <option value="investor">💰 Investor/VC</option>
+                            <option value="client">🤝 Business Client</option>
+                            <option value="vendor">📦 Vendor/Supplier</option>
+                            <option value="media">📰 Media/Press</option>
+                        </select>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Recipient Name:</label>
+                            <input type="text" id="recipientName" placeholder="e.g., Dr. Smith">
+                        </div>
+                        <div class="form-group">
+                            <label>Purpose:</label>
+                            <input type="text" id="composePurpose" placeholder="e.g., Partnership">
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="generateCategoryEmail()">
+                            <i class="fas fa-magic"></i> Generate Email
+                        </button>
+                    </div>
+
+                    <div id="composeMsg" class="message"></div>
+                    <div id="composedEmail"></div>
+                </div>
+            </div>
+
+            <!-- CAMPAIGN TAB -->
+            <div id="campaign" class="tab-pane" style="display:none;">
+                <div class="card">
+                    <h2><i class="fas fa-envelope"></i> Send Campaign</h2>
+
+                    <div class="form-group">
+                        <label>Email Addresses (comma-separated):</label>
+                        <textarea id="emailAddresses" placeholder="email1@example.com, email2@example.com"></textarea>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Subject:</label>
+                            <input type="text" id="sendSubject" placeholder="Email subject">
+                        </div>
+                        <div class="form-group">
+                            <label>Your Gmail:</label>
+                            <input type="email" id="senderEmail" placeholder="your-email@gmail.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Body:</label>
+                        <textarea id="sendBody" placeholder="Email content..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gmail Password (App Specific):</label>
+                        <input type="password" id="senderPassword" placeholder="••••••••••">
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="sendEmails()">
+                            <i class="fas fa-paper-plane"></i> Send Campaign
+                        </button>
+                    </div>
+
+                    <div id="sendMsg" class="message"></div>
+                </div>
+            </div>
+
+            <!-- SAVED TAB -->
+            <div id="saved" class="tab-pane" style="display:none;">
+                <div class="card">
+                    <h2><i class="fas fa-bookmark"></i> Saved Drafts</h2>
+                    <div id="savedEmailsList"></div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <script>
-        let scrapedEmails = [];
-        let generatedEmailDraft = '';
+<!-- ========== PAYMENT MODAL ========== -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>💳 Upgrade to Premium</h2>
+            <button class="close-btn" onclick="closePaymentModal()">×</button>
+        </div>
+        
+        <div class="stats-grid" style="margin-bottom: 1.5rem;">
+            <div class="stat-card">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">Unlimited Scrapes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">100+</div>
+                <div class="stat-label">Emails/Month</div>
+            </div>
+        </div>
 
-        // Tab switching
-        function switchTab(tabName, btnElement) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(tabName).classList.add('active');
-            btnElement.classList.add('active');
+        <div class="form-group">
+            <label>Transaction ID (EasyPaisa):</label>
+            <input type="text" id="transactionId" placeholder="TXN123456789">
+        </div>
+
+        <div class="form-group">
+            <label>Email Address:</label>
+            <input type="email" id="paymentEmail" placeholder="your@email.com">
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="submitPayment()">
+                <i class="fas fa-credit-card"></i> Pay Rs. 499
+            </button>
+            <button class="btn btn-secondary" onclick="closePaymentModal()">Cancel</button>
+        </div>
+
+        <div id="paymentMsg" class="message"></div>
+    </div>
+</div>
+
+<!-- ========== ADMIN MODAL ========== -->
+<div id="adminLoginModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>🔐 Admin Access</h2>
+            <button class="close-btn" onclick="closeAdminModal()">×</button>
+        </div>
+        
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" id="adminPassword" placeholder="Enter admin password">
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="verifyAdminPassword()">Login</button>
+            <button class="btn btn-secondary" onclick="closeAdminModal()">Cancel</button>
+        </div>
+
+        <div id="adminLoginMsg" class="message"></div>
+    </div>
+</div>
+
+<!-- ========== GOOGLE AUTH MODAL ========== -->
+<div id="googleAuthModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fab fa-google"></i> Sign in with Google</h2>
+            <button class="close-btn" onclick="closeGoogleAuth()">×</button>
+        </div>
+        
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" id="googleEmail" placeholder="your@gmail.com">
+        </div>
+
+        <div class="form-group">
+            <label>Full Name:</label>
+            <input type="text" id="googleName" placeholder="Your Name">
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="completeGoogleAuth()">Continue</button>
+            <button class="btn btn-secondary" onclick="closeGoogleAuth()">Cancel</button>
+        </div>
+
+        <div id="googleAuthMsg" class="message"></div>
+    </div>
+</div>
+
+<!-- ========== ADMIN DASHBOARD ========== -->
+<div id="adminDashboard" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f5f7fa; z-index: 999; overflow-y: auto;">
+    <div class="container" style="padding-top: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1 style="color: var(--dark);">🔐 Admin Dashboard</h1>
+            <button class="btn btn-danger" onclick="logoutAdmin()">Logout</button>
+        </div>
+
+        <div class="stats-grid" style="margin-bottom: 2rem;">
+            <div class="stat-card">
+                <div class="stat-value" id="totalUsers">0</div>
+                <div class="stat-label">Total Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="pendingPayments">0</div>
+                <div class="stat-label">Pending Payments</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="approvedPayments">0</div>
+                <div class="stat-label">Approved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalRevenue">Rs. 0</div>
+                <div class="stat-label">Total Revenue</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Payment Requests</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Transaction ID</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsList"></tbody>
+                </table>
+            </div>
+            <div id="noPayments" style="text-align: center; padding: 2rem; color: #999;">No payments yet</div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ADMIN BUTTON ========== -->
+<button onclick="openAdminPanel()" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 50%; font-size: 1.5rem; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: var(--transition); z-index: 100;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    🔐
+</button>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+    // ========== INITIALIZATION ==========
+    let currentUser = null;
+    const ADMIN_PASSWORD = '123456';
+    const FREE_SEARCH_LIMIT = 3;
+
+    // Initialize on load
+    window.addEventListener('load', function() {
+        loadUserFromStorage();
+        updateSearchLimitDisplay();
+        if (localStorage.getItem('adminLoggedIn') === 'true') {
+            loadAdminData();
+        }
+    });
+
+    // ========== TAB SWITCHING ==========
+    function switchTab(tab) {
+        // Hide all tabs
+        document.querySelectorAll('.tab-pane').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+        
+        // Show selected tab
+        document.getElementById(tab).style.display = 'block';
+        event.target.classList.add('active');
+    }
+
+    // ========== GOOGLE AUTHENTICATION ==========
+    function openGoogleAuth() {
+        document.getElementById('googleAuthModal').classList.add('active');
+    }
+
+    function closeGoogleAuth() {
+        document.getElementById('googleAuthModal').classList.remove('active');
+        document.getElementById('googleEmail').value = '';
+        document.getElementById('googleName').value = '';
+    }
+
+    function completeGoogleAuth() {
+        const email = document.getElementById('googleEmail').value.trim();
+        const name = document.getElementById('googleName').value.trim();
+
+        if (!email || !name) {
+            showMessage('googleAuthMsg', 'Please fill in all fields', 'error');
+            return;
         }
 
-        // Scrape emails
-        async function scrapeEmails() {
-            const url = document.getElementById('urlInput').value.trim();
-
-            if (!url) {
-                showMessage('errorMsg', 'Please enter a valid URL');
-                return;
-            }
-
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                showMessage('errorMsg', 'URL must start with http:// or https://');
-                return;
-            }
-
-            document.getElementById('loading').classList.add('active');
-            clearMessage('errorMsg');
-            clearMessage('successMsg');
-            document.getElementById('results').innerHTML = '';
-
-            try {
-                const response = await fetch('/api/scrape', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ url })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Failed to scrape website');
-                }
-
-                scrapedEmails = data.emails || [];
-
-                if (scrapedEmails.length === 0) {
-                    showMessage('successMsg', 'No emails found on this website');
-                    displayResults([]);
-                } else {
-                    showMessage('successMsg', `Successfully scraped ${scrapedEmails.length} email(s)!`);
-                    displayResults(scrapedEmails);
-                    document.getElementById('exportBtn').disabled = false;
-                }
-            } catch (error) {
-                showMessage('errorMsg', 'Error: ' + error.message);
-                console.error('Error:', error);
-            } finally {
-                document.getElementById('loading').classList.remove('active');
-            }
-        }
-
-        // Generate email draft
-        async function generateEmailDraft() {
-            const subject = document.getElementById('emailSubject').value.trim();
-            const company = document.getElementById('targetCompany').value.trim();
-            const purpose = document.getElementById('emailPurpose').value.trim();
-
-            if (!subject || !company || !purpose) {
-                showMessage('draftErrorMsg', 'Please fill in all fields');
-                return;
-            }
-
-            document.getElementById('draftLoading').classList.add('active');
-            clearMessage('draftErrorMsg');
-            clearMessage('draftSuccessMsg');
-
-            try {
-                const response = await fetch('/api/generate-email', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        subject, 
-                        targetCompany: company, 
-                        purpose 
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Failed to generate email');
-                }
-
-                generatedEmailDraft = data.emailDraft;
-                showMessage('draftSuccessMsg', 'Email draft generated successfully!');
-                
-                const draftHtml = `
-                    <div class="results-info">
-                        <div class="results-count">Subject: <span>${escapeHtml(data.subject)}</span></div>
-                    </div>
-                    <div class="email-draft">${escapeHtml(generatedEmailDraft)}</div>
-                    <button class="btn-primary" onclick="copyDraftToSend()">📋 Use in Campaign</button>
-                `;
-                document.getElementById('draftResult').innerHTML = draftHtml;
-            } catch (error) {
-                showMessage('draftErrorMsg', 'Error: ' + error.message);
-            } finally {
-                document.getElementById('draftLoading').classList.remove('active');
-            }
-        }
-
-        // Email templates by category
-        const emailTemplates = {
-            principal: {
-                name: "Principal/Headmaster",
-                templates: (name, purpose) => `Dear Dr. ${name},
-
-I hope this message finds you well. I am writing to express my interest in ${purpose} at your esteemed institution.
-
-With my strong commitment to educational excellence and proven track record in [your field], I believe I can contribute significantly to your school's mission and vision.
-
-I would greatly appreciate the opportunity to discuss how I can support your institution in achieving its goals. I am available at your convenience for a meeting.
-
-Thank you for considering my request. I look forward to hearing from you.
-
-Warm regards,
-[Your Name]`
-            },
-            professor: {
-                name: "Professor/Teacher",
-                templates: (name, purpose) => `Dear Prof. ${name},
-
-I hope you are well. I am writing regarding ${purpose} and would be grateful for your expertise and guidance.
-
-Your pioneering work in [field] has been instrumental in shaping my academic interests. I believe our shared commitment to [topic] could lead to a meaningful collaboration.
-
-Would you have time in the coming weeks for a brief discussion? I would be honored to learn from your insights.
-
-Thank you for considering my request.
-
-Best regards,
-[Your Name]`
-            },
-            university: {
-                name: "University/Institution",
-                templates: (name, purpose) => `Dear [University Name] Team,
-
-I hope this email finds you in good spirits. I am reaching out regarding ${purpose} with your prestigious institution.
-
-Your university's outstanding reputation for excellence aligns perfectly with my goals and values. I am confident that [your background/skills] would be a valuable addition to your community.
-
-I would welcome the opportunity to discuss how I can contribute to your institution's continued success.
-
-Thank you for your time and consideration.
-
-Sincerely,
-[Your Name]`
-            },
-            hr: {
-                name: "HR/Recruiter",
-                templates: (name, purpose) => `Dear ${name}/Hiring Team,
-
-I hope this message finds you well. I am writing to express my strong interest in ${purpose} at your organization.
-
-With my proven expertise in [skills/experience], combined with my passion for [relevant field], I am confident I can deliver significant value to your team from day one.
-
-I would be delighted to discuss how my background aligns with your needs. Please feel free to contact me at your earliest convenience.
-
-Thank you for your consideration.
-
-Best regards,
-[Your Name]`
-            },
-            cto: {
-                name: "CTO/Tech Lead",
-                templates: (name, purpose) => `Hi ${name},
-
-I hope you're having a great day. I'm reaching out regarding ${purpose} and thought your expertise would be invaluable.
-
-Your technical vision and leadership have been instrumental in [specific achievement]. I believe there's a unique opportunity for collaboration that could drive mutual growth.
-
-Would you be open to a brief conversation about this? I'm available at your convenience.
-
-Looking forward to connecting.
-
-Best,
-[Your Name]`
-            },
-            investor: {
-                name: "Investor/VC",
-                templates: (name, purpose) => `Dear ${name},
-
-I hope this email finds you well. I am reaching out regarding ${purpose} - a promising opportunity in [industry/sector].
-
-Our team has developed a compelling value proposition that addresses a significant market gap, with strong potential for growth and ROI.
-
-I would appreciate the opportunity to share our vision and discuss how this aligns with your investment thesis.
-
-Would you have time for a brief call in the coming weeks?
-
-Best regards,
-[Your Name]`
-            },
-            client: {
-                name: "Business Client",
-                templates: (name, purpose) => `Dear ${name},
-
-I trust this message finds you well. I wanted to reach out regarding ${purpose}.
-
-I've been impressed by [company name]'s commitment to [specific value/goal], and I believe we can provide substantial value through [your offering].
-
-Rather than a lengthy discussion, I'd like to schedule a brief exploratory call to understand your needs and share how we might help.
-
-Are you open to a 20-minute conversation?
-
-Best regards,
-[Your Name]`
-            },
-            vendor: {
-                name: "Vendor/Supplier",
-                templates: (name, purpose) => `Dear ${name},
-
-I hope you're well. I am writing regarding ${purpose} and our mutual business interests.
-
-Our organization is always seeking partnerships with reliable, innovative suppliers who share our commitment to quality and excellence.
-
-I would like to explore potential collaboration opportunities. Would you be available for a brief discussion?
-
-Thank you, and I look forward to connecting.
-
-Best regards,
-[Your Name]`
-            },
-            media: {
-                name: "Media/Press",
-                templates: (name, purpose) => `Dear ${name}/Media Team,
-
-I hope this finds you well. I am reaching out regarding ${purpose} - a story that I believe your readers/audience would find compelling.
-
-[Brief description of newsworthy angle]. This represents a significant development in [industry/field] that aligns with your editorial interests.
-
-Would you be interested in learning more? I'm happy to arrange an interview or provide additional information.
-
-Best regards,
-[Your Name]`
-            }
+        currentUser = {
+            email: email,
+            name: name,
+            avatar: name.charAt(0).toUpperCase(),
+            premium: false,
+            searchesUsed: 0,
+            loginDate: new Date().toLocaleString()
         };
 
-        // Load category template
-        function loadCategoryTemplate() {
-            const category = document.getElementById('emailCategory').value;
-            if (category) {
-                const template = emailTemplates[category];
-                document.getElementById('composedEmail').innerHTML = `
-                    <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;">Template for: <strong>${template.name}</strong></p>
-                `;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        updateUserDisplay();
+        closeGoogleAuth();
+        showMessage('scrapeMsg', `✅ Welcome ${name}! You have ${FREE_SEARCH_LIMIT} free searches.`, 'success');
+    }
+
+    // ========== USER MANAGEMENT ==========
+    function loadUserFromStorage() {
+        const user = localStorage.getItem('currentUser');
+        if (user) {
+            currentUser = JSON.parse(user);
+            updateUserDisplay();
+        }
+    }
+
+    function updateUserDisplay() {
+        if (currentUser) {
+            document.getElementById('userInitial').textContent = currentUser.avatar;
+            document.getElementById('userName').textContent = currentUser.name.split(' ')[0];
+            if (currentUser.premium) {
+                document.getElementById('userName').innerHTML += ' <span class="premium-badge">PREMIUM</span>';
             }
         }
+    }
 
-        // Generate email from category
-        function generateCategoryEmail() {
-            const category = document.getElementById('emailCategory').value;
-            const recipientName = document.getElementById('recipientName').value.trim();
-            const purpose = document.getElementById('composePurpose').value.trim();
+    function toggleUserMenu() {
+        alert(`User: ${currentUser ? currentUser.name : 'Not logged in'}\nStatus: ${currentUser && currentUser.premium ? 'Premium' : 'Free'}`);
+    }
 
-            if (!category) {
-                showMessage('composeMsg', 'Please select a category', 'error');
-                return;
-            }
+    function scrollToContent() {
+        document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
+    }
 
-            if (!recipientName || !purpose) {
-                showMessage('composeMsg', 'Please fill in all fields', 'error');
-                return;
-            }
-
-            const template = emailTemplates[category];
-            const generatedEmail = template.templates(recipientName, purpose);
-
-            document.getElementById('composedEmail').innerHTML = `
-                <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;">📧 Generated for: <strong>${template.name}</strong></p>
-                <div style="background: #f9f9f9; padding: 15px; border-left: 4px solid #667eea; border-radius: 4px; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.95em; line-height: 1.6;">
-${escapeHtml(generatedEmail)}
-                </div>
-                <button class="btn-primary" style="margin-top: 15px;" onclick="copyComposedEmail('${escapeHtml(generatedEmail).replace(/'/g, "\\'")}')">📋 Copy Email</button>
-            `;
-            document.getElementById('composedEmail').style.display = 'block';
-            showMessage('composeMsg', 'Email generated successfully!', 'success');
+    // ========== SEARCH LIMIT MANAGEMENT ==========
+    function updateSearchLimitDisplay() {
+        if (!currentUser) {
+            document.getElementById('limitIndicator').style.display = 'none';
+            return;
         }
 
-        // Copy composed email
-        function copyComposedEmail(emailText) {
-            const decodedText = emailText.replace(/&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-            navigator.clipboard.writeText(decodedText).then(() => {
-                showMessage('composeMsg', '✅ Email copied to clipboard!', 'success');
-            }).catch(() => {
-                showMessage('composeMsg', 'Failed to copy email', 'error');
-            });
+        document.getElementById('limitIndicator').style.display = 'block';
+        const used = currentUser.searchesUsed || 0;
+        const percentage = (used / FREE_SEARCH_LIMIT) * 100;
+        document.getElementById('limitText').textContent = `${used}/${FREE_SEARCH_LIMIT}`;
+        document.getElementById('limitFill').style.width = percentage + '%';
+    }
+
+    function checkSearchLimit() {
+        if (!currentUser) {
+            showMessage('scrapeMsg', 'Please sign in with Google first', 'error');
+            return false;
         }
 
-        // Copy draft to send section
-        function copyDraftToSend() {
-            const subject = document.getElementById('emailSubject').value;
-            document.getElementById('sendSubject').value = subject;
-            document.getElementById('sendBody').value = generatedEmailDraft;
-            document.getElementById('send').classList.add('active');
-            document.getElementById('scrape').classList.remove('active');
-            document.getElementById('draft').classList.remove('active');
-            showMessage('sendSuccessMsg', 'Draft copied to campaign section!');
+        if (!currentUser.premium && currentUser.searchesUsed >= FREE_SEARCH_LIMIT) {
+            showMessage('scrapeMsg', `Free limit reached (${FREE_SEARCH_LIMIT}). Upgrade to Premium for unlimited searches.`, 'error');
+            return false;
         }
 
-        // Paste from draft
-        function pasteFromDraft() {
-            if (!generatedEmailDraft) {
-                showMessage('sendErrorMsg', 'Generate a draft first in the Draft Email tab');
-                return;
-            }
-            copyDraftToSend();
+        return true;
+    }
+
+    function incrementSearchCount() {
+        if (currentUser && !currentUser.premium) {
+            currentUser.searchesUsed = (currentUser.searchesUsed || 0) + 1;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            updateSearchLimitDisplay();
+        }
+    }
+
+    // ========== EMAIL SCRAPING ==========
+    async function scrapeEmails() {
+        if (!checkSearchLimit()) return;
+
+        const url = document.getElementById('urlInput').value.trim();
+        if (!url) {
+            showMessage('scrapeMsg', 'Please enter a valid URL', 'error');
+            return;
         }
 
-        // Send emails
-        async function sendEmails() {
-            const emailsText = document.getElementById('recipientEmails').value.trim();
-            const subject = document.getElementById('sendSubject').value.trim();
-            const body = document.getElementById('sendBody').value.trim();
-            const senderEmail = document.getElementById('senderEmail').value.trim();
-            const senderPassword = document.getElementById('senderPassword').value.trim();
+        showMessage('scrapeMsg', 'Scraping emails...', 'info');
 
-            if (!emailsText || !subject || !body || !senderEmail || !senderPassword) {
-                showMessage('sendErrorMsg', 'Please fill in all fields');
-                return;
-            }
-
-            const emailAddresses = emailsText.split(',').map(e => e.trim()).filter(e => e);
-
-            if (emailAddresses.length === 0) {
-                showMessage('sendErrorMsg', 'Please enter valid email addresses');
-                return;
-            }
-
-            document.getElementById('sendLoading').classList.add('active');
-            clearMessage('sendErrorMsg');
-            clearMessage('sendSuccessMsg');
-            document.getElementById('sendResults').innerHTML = '';
-
-            try {
-                const response = await fetch('/api/send-email', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        emailAddresses,
-                        subject,
-                        emailBody: body,
-                        senderEmail,
-                        senderPassword
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Failed to send emails');
-                }
-
-                showMessage('sendSuccessMsg', 
-                    `Campaign sent! ${data.totalSent} sent, ${data.totalFailed} failed`);
-
-                const resultsHtml = data.results.map(result => `
-                    <div class="send-result-item ${result.status}">
-                        <div>
-                            <strong>${escapeHtml(result.email)}</strong>
-                            <br>
-                            <small>${result.status === 'sent' ? '✓ Sent' : '✗ Failed: ' + result.error}</small>
-                        </div>
-                    </div>
-                `).join('');
-
-                document.getElementById('sendResults').innerHTML = resultsHtml;
-            } catch (error) {
-                showMessage('sendErrorMsg', 'Error: ' + error.message);
-            } finally {
-                document.getElementById('sendLoading').classList.remove('active');
-            }
-        }
-
-        // Display results
-        function displayResults(emails) {
-            if (emails.length === 0) {
-                document.getElementById('results').innerHTML = '<div class="no-results">No emails found</div>';
-                return;
-            }
-
-            let html = `
-                <div class="results-info">
-                    <div class="results-count">Found <span>${emails.length}</span> email(s)</div>
-                </div>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Email Address</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-            `;
-
-            emails.forEach((email, index) => {
-                html += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td class="email-cell">${escapeHtml(email)}</td>
-                        <td>
-                            <button class="action-btn" onclick="copyToClipboard('${escapeHtml(email)}')">📋 Copy</button>
-                        </td>
-                    </tr>
-                `;
+        try {
+            const response = await fetch('/api/scrape', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
             });
 
-            html += `</tbody></table></div>`;
-            document.getElementById('results').innerHTML = html;
-        }
+            const data = await response.json();
 
-        // Export to CSV
-        function exportToCSV() {
-            if (scrapedEmails.length === 0) {
-                showMessage('errorMsg', 'No emails to export');
-                return;
-            }
+            if (!response.ok) throw new Error(data.error);
 
-            const headers = ['Email Address', 'Scraped Date'];
-            const currentDate = new Date().toLocaleString();
+            incrementSearchCount();
+            showMessage('scrapeMsg', `✅ Found ${data.count} emails!`, 'success');
             
-            let csv = headers.join(',') + '\n';
-            scrapedEmails.forEach(email => {
-                csv += `"${email}","${currentDate}"\n`;
-            });
-
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `emails_${new Date().getTime()}.csv`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            showMessage('successMsg', 'CSV exported successfully!');
-        }
-
-        // Utility functions
-        function showMessage(elementId, message) {
-            const el = document.getElementById(elementId);
-            el.textContent = message;
-            el.classList.add('active');
-        }
-
-        function clearMessage(elementId) {
-            const el = document.getElementById(elementId);
-            el.classList.remove('active');
-        }
-
-        function clearResults() {
-            document.getElementById('results').innerHTML = '';
-            scrapedEmails = [];
-            document.getElementById('urlInput').value = '';
-            document.getElementById('exportBtn').disabled = true;
-            clearMessage('errorMsg');
-            clearMessage('successMsg');
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showMessage('successMsg', 'Email copied to clipboard!');
-            });
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // Save draft function
-        function saveDraftPrompt() {
-            if (!generatedEmailDraft) {
-                showMessage('draftErrorMsg', 'Generate a draft first before saving');
-                return;
-            }
-
-            const subject = document.getElementById('emailSubject').value.trim();
-            if (!subject) {
-                showMessage('draftErrorMsg', 'Subject is required to save');
-                return;
-            }
-
-            const filename = prompt('Enter a name to save this draft:', subject);
-            if (!filename) return;
-
-            saveDraft(subject, generatedEmailDraft, filename);
-        }
-
-        // Save draft to server
-        async function saveDraft(subject, emailBody, filename) {
-            try {
-                const response = await fetch('/api/save-email', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        subject,
-                        emailBody,
-                        filename
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Failed to save draft');
-                }
-
-                showMessage('draftSuccessMsg', `✅ Draft saved as "${filename}"`);
-            } catch (error) {
-                showMessage('draftErrorMsg', 'Error: ' + error.message);
-            }
-        }
-
-        // Show loaded drafts
-        async function showLoadedDrafts() {
-            try {
-                const response = await fetch('/api/saved-emails');
-                const data = await response.json();
-
-                if (!response.ok || !data.emails) {
-                    showMessage('draftErrorMsg', 'No saved drafts found');
-                    return;
-                }
-
-                if (data.emails.length === 0) {
-                    showMessage('draftErrorMsg', 'No saved drafts yet. Generate and save one first!');
-                    return;
-                }
-
-                let html = '<div style="margin-top: 30px;"><h3 style="color: #333; margin-bottom: 15px;">📂 Your Saved Drafts</h3>';
-                html += '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">';
-
-                data.emails.forEach(email => {
-                    html += `
-                        <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
-                            <div style="font-weight: 600; color: #333; margin-bottom: 10px;">${escapeHtml(email.filename)}</div>
-                            <div style="display: flex; gap: 8px;">
-                                <button class="action-btn" onclick="loadDraft('${email.filename}')" style="flex: 1;">📥 Load</button>
-                                <button class="action-btn" onclick="deleteDraft('${email.filename}')" style="flex: 1; background: #f44336; color: white;">🗑️ Delete</button>
+            // Display results
+            const html = `
+                <div style="margin-top: 1.5rem;">
+                    <h3 style="margin-bottom: 1rem;">Found ${data.count} Emails:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem;">
+                        ${data.emails.map(email => `
+                            <div style="background: var(--light); padding: 1rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                <span>${email}</span>
+                                <button onclick="navigator.clipboard.writeText('${email}')" class="btn btn-secondary" style="min-width: auto; padding: 0.5rem;">📋</button>
                             </div>
-                        </div>
-                    `;
-                });
-
-                html += '</div></div>';
-                document.getElementById('savedDraftsPanel').innerHTML = html;
-            } catch (error) {
-                showMessage('draftErrorMsg', 'Error: ' + error.message);
-            }
-        }
-
-        // Load draft
-        async function loadDraft(filename) {
-            try {
-                const response = await fetch(`/api/load-email/${filename}`);
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Failed to load draft');
-                }
-
-                generatedEmailDraft = data.email.body;
-                document.getElementById('emailSubject').value = data.email.subject;
-                document.getElementById('sendSubject').value = data.email.subject;
-                document.getElementById('sendBody').value = data.email.body;
-
-                // Display the loaded draft
-                const draftHtml = `
-                    <div class="results-info">
-                        <div class="results-count">Subject: <span>${escapeHtml(data.email.subject)}</span></div>
-                    </div>
-                    <div class="email-draft">${escapeHtml(generatedEmailDraft)}</div>
-                    <button class="btn-primary" onclick="copyDraftToSend()">📋 Use in Campaign</button>
-                `;
-                document.getElementById('draftResult').innerHTML = draftHtml;
-                document.getElementById('saveDraftBtn').disabled = false;
-
-                showMessage('draftSuccessMsg', `✅ Draft "${filename}" loaded successfully`);
-            } catch (error) {
-                showMessage('draftErrorMsg', 'Error: ' + error.message);
-            }
-        }
-
-        // Delete draft
-        async function deleteDraft(filename) {
-            if (!confirm(`Are you sure you want to delete "${filename}"?`)) {
-                return;
-            }
-
-            try {
-                const response = await fetch(`/api/delete-email/${filename}`, {
-                    method: 'DELETE'
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Failed to delete draft');
-                }
-
-                showMessage('draftSuccessMsg', `✅ Draft "${filename}" deleted`);
-                showLoadedDrafts(); // Refresh the list
-            } catch (error) {
-                showMessage('draftErrorMsg', 'Error: ' + error.message);
-            }
-        }
-    </script>
-
-    <!-- FOOTER & PAYMENT SECTION -->
-    <footer style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin-top: 50px; padding: 40px 20px; border-radius: 15px 15px 0 0;">
-        <div class="container">
-            <!-- Payment Section -->
-            <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 10px; margin-bottom: 30px; backdrop-filter: blur(10px);">
-                <h3 style="margin-bottom: 20px; text-align: center;">💳 Upgrade to Premium</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; text-align: center;">
-                        <h4>Free Plan</h4>
-                        <p style="font-size: 2em; margin: 10px 0;">Free</p>
-                        <p>✅ Email Scraping (10/day)<br>✅ Email Drafts<br>✅ Compose Templates</p>
-                        <button class="btn-primary" style="width: 100%;">Current Plan</button>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 8px; text-align: center; border: 2px solid #FFD700;">
-                        <h4>⭐ Premium</h4>
-                        <p style="font-size: 2em; margin: 10px 0;">Rs. 499</p>
-                        <p>✅ Unlimited Scraping<br>✅ Bulk Send (100/month)<br>✅ Priority Support</p>
-                        <button class="btn-primary" style="width: 100%; background: #FFD700; color: #667eea;" onclick="initiateEasyPaisaPayment()">Pay with EasyPaisa</button>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; text-align: center;">
-                        <h4>🚀 Enterprise</h4>
-                        <p style="font-size: 2em; margin: 10px 0;">Custom</p>
-                        <p>✅ Everything<br>✅ API Access<br>✅ Dedicated Support</p>
-                        <button class="btn-primary" style="width: 100%;" onclick="contactEnterprise()">Contact Sales</button>
+                        `).join('')}
                     </div>
                 </div>
-            </div>
+            `;
+            document.getElementById('scrapeResults').innerHTML = html;
+        } catch (error) {
+            showMessage('scrapeMsg', 'Error: ' + error.message, 'error');
+        }
+    }
 
-            <!-- Credits Section -->
-            <div style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 30px; text-align: center;">
-                <h4 style="margin-bottom: 20px;">👨‍💻 Made by Muhammad Bin Mushtaq</h4>
-                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
-                    <a href="https://github.com/Muhammad-BinMushtaq" target="_blank" style="color: white; text-decoration: none; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; transition: all 0.3s;">
-                        🔗 GitHub
-                    </a>
-                    <a href="https://muhammadcode.netlify.app/" target="_blank" style="color: white; text-decoration: none; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; transition: all 0.3s;">
-                        🌐 Portfolio
-                    </a>
-                    <a href="https://www.linkedin.com/in/muhammad-binmushtaq/" target="_blank" style="color: white; text-decoration: none; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; transition: all 0.3s;">
-                        💼 LinkedIn
-                    </a>
-                </div>
-                <p style="opacity: 0.8; margin-bottom: 15px;">📧 Free Plan: Scrape up to 10 emails per day • Send 20 emails/month</p>
-                <p style="font-size: 0.9em; opacity: 0.6;">
-                    ⚠️ API Protection: All APIs are currently public. We recommend not sharing your links with untrusted sources.<br>
-                    For production use, implement API keys and rate limiting.
-                </p>
-                <p style="margin-top: 20px; opacity: 0.7;">© 2026 Email Campaign Manager. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    // ========== EMAIL TEMPLATES ==========
+    const emailTemplates = {
+        principal: "Dear Dr. [NAME],\n\nI hope this message finds you well. I am writing to express my interest in [PURPOSE] at your esteemed institution.\n\nWith my background and passion for education, I believe I can contribute significantly to your school's mission and help students achieve their potential.\n\nI would appreciate the opportunity to discuss this further. Would you have time for a brief conversation?\n\nThank you for considering my request.\n\nBest regards,\n[Your Name]",
+        
+        professor: "Dear Prof. [NAME],\n\nI hope you are well. I am writing regarding [PURPOSE].\n\nYour groundbreaking work in this field has deeply inspired my academic and professional journey. I greatly admire your contributions and would be honored to discuss potential collaboration or mentorship opportunities.\n\nWould you be available for a discussion at your convenience?\n\nThank you for considering my request.\n\nBest regards,\n[Your Name]",
+        
+        university: "Dear Admissions Team,\n\nI am writing to express my strong interest in [PURPOSE] with your institution.\n\nYour university's commitment to excellence and innovation aligns perfectly with my academic goals and values. I am confident that I can make meaningful contributions to your academic community.\n\nI would welcome the opportunity to discuss how I can support your institution's mission.\n\nThank you for your consideration.\n\nBest regards,\n[Your Name]",
+        
+        hr: "Dear [NAME],\n\nI hope this email finds you in good health. I am writing to express my interest in [PURPOSE] at your esteemed organization.\n\nWith [NUMBER] years of experience in my field, I have developed strong skills in leadership, problem-solving, and team collaboration. I am confident that these skills will enable me to make significant contributions to your team.\n\nI would appreciate the opportunity to discuss how my background aligns with your needs.\n\nBest regards,\n[Your Name]",
+        
+        cto: "Dear [NAME],\n\nI hope you're having a great day. I'm reaching out regarding [PURPOSE].\n\nI have extensive experience with cutting-edge technologies and have successfully led teams to deliver innovative solutions. I believe my technical expertise and strategic vision could add significant value to your organization.\n\nWould you be open to a conversation about potential opportunities?\n\nBest regards,\n[Your Name]",
+        
+        investor: "Dear [NAME],\n\nI am reaching out regarding an exciting opportunity for [PURPOSE].\n\nOur business model has demonstrated strong market potential with [KEY METRICS]. We are seeking investors who share our vision for growth and innovation.\n\nI would love to schedule a brief call to discuss how this opportunity aligns with your investment portfolio.\n\nBest regards,\n[Your Name]",
+        
+        client: "Dear [NAME],\n\nI hope you're doing well. I am writing to propose [PURPOSE] that I believe could benefit your organization.\n\nBased on my understanding of your business, I have identified several opportunities where our solutions can drive measurable value. I would be delighted to discuss how we can partner for mutual success.\n\nWould you have time for a brief meeting?\n\nBest regards,\n[Your Name]",
+        
+        vendor: "Dear [NAME],\n\nI am reaching out regarding [PURPOSE] between our companies.\n\nWe specialize in providing high-quality [PRODUCT/SERVICE] that has consistently delivered excellent results for our partners. I believe our offerings could be mutually beneficial for our organizations.\n\nI would welcome the opportunity to discuss potential collaboration.\n\nBest regards,\n[Your Name]",
+        
+        media: "Dear [NAME],\n\nI am writing to share an exciting story about [PURPOSE] that I believe would be of great interest to your readers/audience.\n\nThis initiative showcases innovation and positive impact in our industry. I would be delighted to provide more details, schedule an interview, or facilitate a site visit.\n\nPlease let me know if you would like to explore this further.\n\nBest regards,\n[Your Name]"
+    };
 
-    <script>
-        // ============ PAYMENT SYSTEM ============
+    function loadCategoryTemplate() {
+        const category = document.getElementById('emailCategory').value;
+        if (category && emailTemplates[category]) {
+            showMessage('composeMsg', `✅ Template loaded for ${category}. Fill in the details to customize.`, 'success');
+        }
+    }
 
-        // Open payment modal
-        function initiateEasyPaisaPayment() {
-            document.getElementById('paymentModal').style.display = 'flex';
+    function generateCategoryEmail() {
+        const category = document.getElementById('emailCategory').value;
+        const recipientName = document.getElementById('recipientName').value.trim();
+        const purpose = document.getElementById('composePurpose').value.trim();
+
+        if (!category) {
+            showMessage('composeMsg', 'Please select a category', 'error');
+            return;
         }
 
-        // Close payment modal
-        function closePaymentModal() {
-            document.getElementById('paymentModal').style.display = 'none';
+        if (!recipientName || !purpose) {
+            showMessage('composeMsg', 'Please fill in all fields', 'error');
+            return;
+        }
+
+        let template = emailTemplates[category];
+        let subject = '';
+
+        // Generate subject based on category and purpose
+        switch(category) {
+            case 'principal':
+                subject = `Inquiry Regarding ${purpose} - Professional Request`;
+                break;
+            case 'professor':
+                subject = `${purpose} Opportunity - Academic Discussion`;
+                break;
+            case 'university':
+                subject = `Application for ${purpose}`;
+                break;
+            case 'hr':
+                subject = `Application for ${purpose}`;
+                break;
+            case 'cto':
+                subject = `${purpose} - Technical Opportunity`;
+                break;
+            case 'investor':
+                subject = `Investment Opportunity: ${purpose}`;
+                break;
+            case 'client':
+                subject = `Proposal for ${purpose}`;
+                break;
+            case 'vendor':
+                subject = `Partnership Opportunity: ${purpose}`;
+                break;
+            case 'media':
+                subject = `Story Pitch: ${purpose}`;
+                break;
+            default:
+                subject = `Regarding ${purpose}`;
+        }
+
+        // Replace placeholders
+        let emailBody = template
+            .replace(/\[NAME\]/g, recipientName)
+            .replace(/\[PURPOSE\]/g, purpose)
+            .replace(/\[NUMBER\]/g, '5+')
+            .replace(/\[KEY METRICS\]/g, 'strong growth metrics')
+            .replace(/\[PRODUCT\/SERVICE\]/g, 'premium solutions');
+
+        const html = `
+            <div style="background: var(--light); padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3>Generated Email</h3>
+                    <button onclick="copyCEmail('${btoa(emailBody)}')" class="btn btn-secondary" style="min-width: auto;">📋 Copy</button>
+                </div>
+                <div style="background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                    <strong style="color: var(--dark);">Subject:</strong> ${subject}
+                </div>
+                <div style="background: white; padding: 1rem; border-radius: 8px; white-space: pre-wrap; line-height: 1.6; color: var(--dark); max-height: 300px; overflow-y: auto; border: 1px solid var(--light);">
+                    ${emailBody}
+                </div>
+                <div class="btn-group" style="margin-top: 1rem;">
+                    <button class="btn btn-primary" onclick="copyToSend('${subject}', '${btoa(emailBody)}')">Use in Campaign</button>
+                    <button class="btn btn-secondary" onclick="saveEmailDraft('${subject}', '${btoa(emailBody)}')">Save Draft</button>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('composedEmail').innerHTML = html;
+        showMessage('composeMsg', '✅ Email generated successfully!', 'success');
+    }
+
+    function copyCEmail(encodedEmail) {
+        const email = atob(encodedEmail);
+        navigator.clipboard.writeText(email);
+        showMessage('composeMsg', '✅ Email copied to clipboard!', 'success');
+    }
+
+    function copyToSend(subject, encodedBody) {
+        document.getElementById('sendSubject').value = subject;
+        document.getElementById('sendBody').value = atob(encodedBody);
+        switchTab('campaign');
+        showMessage('sendMsg', '✅ Email copied to campaign. Ready to send!', 'success');
+    }
+
+    function saveEmailDraft(subject, encodedBody) {
+        const drafts = JSON.parse(localStorage.getItem('emailDrafts') || '[]');
+        const draft = {
+            id: Date.now(),
+            subject: subject,
+            body: atob(encodedBody),
+            saved: new Date().toLocaleString()
+        };
+        drafts.push(draft);
+        localStorage.setItem('emailDrafts', JSON.stringify(drafts));
+        showMessage('composeMsg', '✅ Draft saved! Check Saved tab to view.', 'success');
+        loadSavedEmails();
+    }
+
+    function loadSavedEmails() {
+        const drafts = JSON.parse(localStorage.getItem('emailDrafts') || '[]');
+        const savedDiv = document.getElementById('savedEmailsList');
+
+        if (drafts.length === 0) {
+            savedDiv.innerHTML = '<p style="text-align: center; color: #999;">No saved drafts yet</p>';
+            return;
+        }
+
+        const html = `
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Saved Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${drafts.map(draft => `
+                            <tr>
+                                <td>${draft.subject}</td>
+                                <td>${draft.saved}</td>
+                                <td>
+                                    <button onclick="useSavedDraft(${draft.id})" class="btn btn-primary" style="padding: 0.5rem; min-width: auto;">Use</button>
+                                    <button onclick="deleteSavedDraft(${draft.id})" class="btn btn-danger" style="padding: 0.5rem; min-width: auto;">Delete</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+        savedDiv.innerHTML = html;
+    }
+
+    function useSavedDraft(id) {
+        const drafts = JSON.parse(localStorage.getItem('emailDrafts') || '[]');
+        const draft = drafts.find(d => d.id === id);
+        if (draft) {
+            document.getElementById('sendSubject').value = draft.subject;
+            document.getElementById('sendBody').value = draft.body;
+            switchTab('campaign');
+        }
+    }
+
+    function deleteSavedDraft(id) {
+        if (confirm('Delete this draft?')) {
+            let drafts = JSON.parse(localStorage.getItem('emailDrafts') || '[]');
+            drafts = drafts.filter(d => d.id !== id);
+            localStorage.setItem('emailDrafts', JSON.stringify(drafts));
+            loadSavedEmails();
+        }
+    }
+
+    // ========== EMAIL SENDING ==========
+    async function sendEmails() {
+        const emails = document.getElementById('emailAddresses').value.trim();
+        const subject = document.getElementById('sendSubject').value.trim();
+        const body = document.getElementById('sendBody').value.trim();
+        const senderEmail = document.getElementById('senderEmail').value.trim();
+        const senderPassword = document.getElementById('senderPassword').value.trim();
+
+        if (!emails || !subject || !body || !senderEmail || !senderPassword) {
+            showMessage('sendMsg', 'Please fill in all fields', 'error');
+            return;
+        }
+
+        showMessage('sendMsg', 'Sending emails...', 'info');
+
+        try {
+            const emailList = emails.split(',').map(e => e.trim()).filter(e => e);
+            
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    emailAddresses: emailList,
+                    subject: subject,
+                    emailBody: body,
+                    senderEmail: senderEmail,
+                    senderPassword: senderPassword
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) throw new Error(data.error);
+
+            showMessage('sendMsg', `✅ Campaign sent! ${data.totalSent} sent, ${data.totalFailed} failed.`, 'success');
+        } catch (error) {
+            showMessage('sendMsg', 'Error: ' + error.message, 'error');
+        }
+    }
+
+    // ========== PAYMENT SYSTEM ==========
+    function openPaymentModal() {
+        document.getElementById('paymentModal').classList.add('active');
+    }
+
+    function closePaymentModal() {
+        document.getElementById('paymentModal').classList.remove('active');
+    }
+
+    function submitPayment() {
+        const transactionId = document.getElementById('transactionId').value.trim();
+        const email = document.getElementById('paymentEmail').value.trim();
+
+        if (!transactionId || !email) {
+            showMessage('paymentMsg', 'Please fill in all fields', 'error');
+            return;
+        }
+
+        const payment = {
+            id: Date.now(),
+            email: email,
+            transactionId: transactionId,
+            amount: 499,
+            status: 'pending',
+            date: new Date().toLocaleString(),
+            currency: 'PKR'
+        };
+
+        let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+        payments.push(payment);
+        localStorage.setItem('payments', JSON.stringify(payments));
+
+        if (currentUser && currentUser.email === email) {
+            currentUser.premium = false; // Will be true after approval
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        }
+
+        showMessage('paymentMsg', '✅ Payment submitted! Waiting for approval...', 'success');
+        setTimeout(() => {
+            closePaymentModal();
+            alert('Payment recorded. Admin will confirm within 24 hours.');
             document.getElementById('transactionId').value = '';
             document.getElementById('paymentEmail').value = '';
-            document.getElementById('paymentMsg').innerHTML = '';
+        }, 1500);
+    }
+
+    // ========== ADMIN SYSTEM ==========
+    function openAdminPanel() {
+        if (localStorage.getItem('adminLoggedIn') === 'true') {
+            document.getElementById('adminDashboard').style.display = 'block';
+            loadAdminData();
+        } else {
+            document.getElementById('adminLoginModal').classList.add('active');
         }
+    }
 
-        // Submit payment
-        function submitPayment() {
-            const transactionId = document.getElementById('transactionId').value.trim();
-            const email = document.getElementById('paymentEmail').value.trim();
+    function closeAdminModal() {
+        document.getElementById('adminLoginModal').classList.remove('active');
+    }
 
-            if (!transactionId || !email) {
-                showMessage('paymentMsg', 'Please fill in all fields', 'error');
-                return;
-            }
-
-            // Create payment record
-            const payment = {
-                id: Date.now(),
-                email: email,
-                transactionId: transactionId,
-                amount: 499,
-                status: 'pending',
-                date: new Date().toLocaleString(),
-                currency: 'PKR'
-            };
-
-            // Get existing payments from localStorage
-            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
-            payments.push(payment);
-            localStorage.setItem('payments', JSON.stringify(payments));
-
-            showMessage('paymentMsg', '✅ Payment submitted! Waiting for admin confirmation...', 'success');
-            
-            setTimeout(() => {
-                closePaymentModal();
-                alert('📝 Your transaction has been recorded.\n\nTransaction ID: ' + transactionId + '\nStatus: Pending\n\nOur admin will confirm your payment within 24 hours.');
-            }, 1500);
-        }
-
-        // ============ ADMIN SYSTEM ============
-
-        const ADMIN_PASSWORD = '123456'; // Change this to a secure password
-
-        // Open admin panel
-        function openAdminPanel() {
-            const adminLoggedIn = localStorage.getItem('adminLoggedIn');
-            if (adminLoggedIn === 'true') {
-                document.getElementById('adminDashboard').style.display = 'block';
-                loadAdminData();
-            } else {
-                document.getElementById('adminLoginModal').style.display = 'flex';
-            }
-        }
-
-        // Verify admin password
-        function verifyAdminPassword() {
-            const password = document.getElementById('adminPassword').value;
-            
-            if (password === ADMIN_PASSWORD) {
-                localStorage.setItem('adminLoggedIn', 'true');
-                document.getElementById('adminLoginModal').style.display = 'none';
-                document.getElementById('adminDashboard').style.display = 'block';
-                loadAdminData();
-                document.getElementById('adminPassword').value = '';
-            } else {
-                showMessage('adminLoginMsg', '❌ Incorrect password', 'error');
-            }
-        }
-
-        // Close admin modal
-        function closeAdminModal() {
-            document.getElementById('adminLoginModal').style.display = 'none';
+    function verifyAdminPassword() {
+        const password = document.getElementById('adminPassword').value;
+        
+        if (password === ADMIN_PASSWORD) {
+            localStorage.setItem('adminLoggedIn', 'true');
+            document.getElementById('adminLoginModal').classList.remove('active');
+            document.getElementById('adminDashboard').style.display = 'block';
+            loadAdminData();
             document.getElementById('adminPassword').value = '';
+        } else {
+            showMessage('adminLoginMsg', '❌ Incorrect password', 'error');
+        }
+    }
+
+    function logoutAdmin() {
+        localStorage.setItem('adminLoggedIn', 'false');
+        document.getElementById('adminDashboard').style.display = 'none';
+        alert('Logged out');
+    }
+
+    function loadAdminData() {
+        let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+        let users = new Set(payments.map(p => p.email)).size;
+        let pending = payments.filter(p => p.status === 'pending').length;
+        let approved = payments.filter(p => p.status === 'approved').length;
+        let revenue = payments.filter(p => p.status === 'approved').reduce((sum, p) => sum + p.amount, 0);
+
+        document.getElementById('totalUsers').textContent = users;
+        document.getElementById('pendingPayments').textContent = pending;
+        document.getElementById('approvedPayments').textContent = approved;
+        document.getElementById('totalRevenue').textContent = 'Rs. ' + revenue.toLocaleString();
+
+        const paymentsList = document.getElementById('paymentsList');
+        paymentsList.innerHTML = '';
+
+        if (payments.length === 0) {
+            document.getElementById('noPayments').style.display = 'block';
+            return;
         }
 
-        // Logout admin
-        function logoutAdmin() {
-            localStorage.setItem('adminLoggedIn', 'false');
-            document.getElementById('adminDashboard').style.display = 'none';
-            alert('Logged out successfully');
-        }
+        document.getElementById('noPayments').style.display = 'none';
 
-        // Switch admin tabs
-        function switchAdminTab(tab, button) {
-            document.querySelectorAll('[id^="admin"]').forEach(el => {
-                if (el.id.startsWith('admin') && el.id !== 'adminDashboard' && el.id !== 'adminLoginModal') {
-                    el.style.display = 'none';
-                }
-            });
-            document.getElementById('admin' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.display = 'block';
-            
-            document.querySelectorAll('.tabs .tab-btn').forEach(btn => btn.style.borderColor = '');
-            button.style.borderColor = '#667eea';
-            button.style.borderBottomWidth = '3px';
-        }
-
-        // Load admin data
-        function loadAdminData() {
-            loadPaymentsData();
-            loadStatistics();
-            loadUsersData();
-        }
-
-        // Load payments data
-        function loadPaymentsData() {
-            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
-            const paymentsList = document.getElementById('paymentsList');
-            const noPayments = document.getElementById('noPayments');
-
-            paymentsList.innerHTML = '';
-
-            if (payments.length === 0) {
-                noPayments.style.display = 'block';
-                return;
-            }
-
-            noPayments.style.display = 'none';
-
-            payments.forEach(payment => {
-                const row = document.createElement('tr');
-                const statusColor = payment.status === 'pending' ? '#ff9800' : payment.status === 'approved' ? '#4caf50' : '#f44336';
-                
-                row.innerHTML = `
-                    <td>${payment.email}</td>
-                    <td>${payment.transactionId}</td>
-                    <td>Rs. ${payment.amount}</td>
-                    <td>${payment.date}</td>
-                    <td style="color: ${statusColor}; font-weight: bold;">${payment.status.toUpperCase()}</td>
-                    <td>
-                        ${payment.status === 'pending' ? `
-                            <button onclick="approvePayment(${payment.id})" style="background: #4caf50; color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; margin-right: 5px;">✓ Approve</button>
-                            <button onclick="rejectPayment(${payment.id})" style="background: #f44336; color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;">✕ Reject</button>
-                        ` : `<span style="color: #999;">Processed</span>`}
-                    </td>
-                `;
-                paymentsList.appendChild(row);
-            });
-        }
-
-        // Approve payment
-        function approvePayment(paymentId) {
-            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
-            payments = payments.map(p => {
-                if (p.id === paymentId) {
-                    p.status = 'approved';
-                    p.approvedDate = new Date().toLocaleString();
-                }
-                return p;
-            });
-            localStorage.setItem('payments', JSON.stringify(payments));
-            loadPaymentsData();
-            alert('✅ Payment approved!');
-        }
-
-        // Reject payment
-        function rejectPayment(paymentId) {
-            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
-            payments = payments.map(p => {
-                if (p.id === paymentId) {
-                    p.status = 'rejected';
-                    p.rejectedDate = new Date().toLocaleString();
-                }
-                return p;
-            });
-            localStorage.setItem('payments', JSON.stringify(payments));
-            loadPaymentsData();
-            alert('❌ Payment rejected!');
-        }
-
-        // Load statistics
-        function loadStatistics() {
-            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
-            let users = new Set(payments.map(p => p.email)).size;
-            let pending = payments.filter(p => p.status === 'pending').length;
-            let approved = payments.filter(p => p.status === 'approved').length;
-            let revenue = payments.filter(p => p.status === 'approved').reduce((sum, p) => sum + p.amount, 0);
-
-            document.getElementById('totalUsers').textContent = users;
-            document.getElementById('pendingPayments').textContent = pending;
-            document.getElementById('approvedPayments').textContent = approved;
-            document.getElementById('totalRevenue').textContent = 'Rs. ' + revenue.toLocaleString();
-        }
-
-        // Load users data
-        function loadUsersData() {
-            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
-            const usersTable = document.getElementById('usersTable');
-            const noUsers = document.getElementById('noUsers');
-
-            usersTable.innerHTML = '';
-            let uniqueUsers = [];
-            let seenEmails = new Set();
-
-            payments.forEach(p => {
-                if (!seenEmails.has(p.email)) {
-                    seenEmails.add(p.email);
-                    uniqueUsers.push({
-                        email: p.email,
-                        status: p.status === 'approved' ? '✅ Premium' : '⏳ Pending',
-                        joined: p.date
-                    });
-                }
-            });
-
-            if (uniqueUsers.length === 0) {
-                noUsers.style.display = 'block';
-                return;
-            }
-
-            noUsers.style.display = 'none';
-
-            uniqueUsers.forEach(user => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user.email}</td>
-                    <td>${user.status}</td>
-                    <td>${user.joined}</td>
-                `;
-                usersTable.appendChild(row);
-            });
-        }
-
-        // EasyPaisa Payment Handler (updated)
-
-        // Enterprise Contact
-        function contactEnterprise() {
-            alert('📧 Enterprise Solutions\n\nContact us for custom pricing and features:\n\nGitHub: github.com/Muhammad-BinMushtaq\nLinkedIn: linkedin.com/in/muhammad-binmushtaq/');
-        }
-
-        // Ensure admin is logged out on page load
-        window.addEventListener('load', function() {
-            // Initialize localStorage
-            if (!localStorage.getItem('payments')) {
-                localStorage.setItem('payments', '[]');
-            }
-            if (!localStorage.getItem('adminLoggedIn')) {
-                localStorage.setItem('adminLoggedIn', 'false');
-            }
+        payments.forEach(p => {
+            const statusColor = p.status === 'pending' ? '#ff9800' : p.status === 'approved' ? '#43e97b' : '#f5576c';
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${p.email}</td>
+                <td>${p.transactionId}</td>
+                <td>Rs. ${p.amount}</td>
+                <td>${p.date}</td>
+                <td style="color: ${statusColor}; font-weight: bold;">${p.status.toUpperCase()}</td>
+                <td>
+                    ${p.status === 'pending' ? `
+                        <button onclick="approvePayment(${p.id})" class="btn btn-success" style="padding: 0.5rem;">✓</button>
+                        <button onclick="rejectPayment(${p.id})" class="btn btn-danger" style="padding: 0.5rem;">✕</button>
+                    ` : 'Processed'}
+                </td>
+            `;
+            paymentsList.appendChild(row);
         });
-    </script>
+    }
+
+    function approvePayment(id) {
+        let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+        payments = payments.map(p => {
+            if (p.id === id) p.status = 'approved';
+            return p;
+        });
+        localStorage.setItem('payments', JSON.stringify(payments));
+
+        // Mark user as premium if logged in
+        if (currentUser && payments.find(p => p.id === id && p.email === currentUser.email)) {
+            currentUser.premium = true;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            updateUserDisplay();
+        }
+
+        loadAdminData();
+        alert('✅ Payment approved!');
+    }
+
+    function rejectPayment(id) {
+        let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+        payments = payments.map(p => {
+            if (p.id === id) p.status = 'rejected';
+            return p;
+        });
+        localStorage.setItem('payments', JSON.stringify(payments));
+        loadAdminData();
+        alert('❌ Payment rejected!');
+    }
+
+    // ========== UTILITY FUNCTIONS ==========
+    function showMessage(elementId, message, type) {
+        const msg = document.getElementById(elementId);
+        msg.textContent = message;
+        msg.classList.add('active', type);
+        setTimeout(() => msg.classList.remove('active'), 3000);
+    }
+</script>
+
 </body>
 </html>
