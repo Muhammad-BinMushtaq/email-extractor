@@ -617,6 +617,136 @@
         </div>
     </div>
 
+    <!-- PAYMENT MODAL -->
+    <div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 40px; border-radius: 15px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+            <h2 style="color: #667eea; margin-bottom: 20px;">💳 Premium Payment</h2>
+            <p style="color: #666; margin-bottom: 20px;">Amount: <strong>Rs. 499/month</strong></p>
+            
+            <div class="form-group">
+                <label>Transaction ID (from EasyPaisa):</label>
+                <input type="text" id="transactionId" placeholder="e.g., TXN123456" style="margin-bottom: 20px;">
+            </div>
+
+            <div class="form-group">
+                <label>Your Email:</label>
+                <input type="email" id="paymentEmail" placeholder="your-email@example.com" style="margin-bottom: 20px;">
+            </div>
+
+            <div class="button-group" style="gap: 10px;">
+                <button class="btn-primary" onclick="submitPayment()" style="flex: 1;">Submit Payment</button>
+                <button class="btn-secondary" onclick="closePaymentModal()" style="flex: 1;">Cancel</button>
+            </div>
+
+            <div id="paymentMsg" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="adminDashboard" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f5f5f5; z-index: 999; overflow-y: auto; padding: 20px;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: white; padding: 20px; border-radius: 10px;">
+                <h1 style="color: #667eea;">🔐 Admin Dashboard</h1>
+                <button class="btn-secondary" onclick="logoutAdmin()" style="background: #f44336; color: white;">Logout</button>
+            </div>
+
+            <!-- Admin Tabs -->
+            <div class="tabs" style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                <button class="tab-btn active" onclick="switchAdminTab('payments', this)" style="background: white; color: #667eea; border: 2px solid #667eea;">💳 Payments</button>
+                <button class="tab-btn" onclick="switchAdminTab('stats', this)" style="background: white; color: #667eea;">📊 Statistics</button>
+                <button class="tab-btn" onclick="switchAdminTab('users', this)" style="background: white; color: #667eea;">👥 Users</button>
+            </div>
+
+            <!-- Payments Tab -->
+            <div id="adminPayments" style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                <h2 style="color: #333; margin-bottom: 20px;">Payment Requests</h2>
+                <div id="paymentsTable" style="overflow-x: auto;">
+                    <table style="width: 100%;">
+                        <thead>
+                            <tr style="background: #f8f9fa;">
+                                <th>Email</th>
+                                <th>Transaction ID</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsList"></tbody>
+                    </table>
+                </div>
+                <div id="noPayments" style="text-align: center; padding: 40px; color: #999;">No pending payments</div>
+            </div>
+
+            <!-- Stats Tab -->
+            <div id="adminStats" style="display: none; background: white; padding: 20px; border-radius: 10px;">
+                <h2 style="color: #333; margin-bottom: 20px;">📊 Statistics</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <p style="font-size: 2.5em; margin: 10px 0;" id="totalUsers">0</p>
+                        <p>Total Users</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <p style="font-size: 2.5em; margin: 10px 0;" id="pendingPayments">0</p>
+                        <p>Pending Payments</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <p style="font-size: 2.5em; margin: 10px 0;" id="approvedPayments">0</p>
+                        <p>Approved</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <p style="font-size: 2.5em; margin: 10px 0;" id="totalRevenue">Rs. 0</p>
+                        <p>Total Revenue</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div id="adminUsers" style="display: none; background: white; padding: 20px; border-radius: 10px;">
+                <h2 style="color: #333; margin-bottom: 20px;">👥 Active Users</h2>
+                <div id="usersList" style="overflow-x: auto;">
+                    <table style="width: 100%;">
+                        <thead>
+                            <tr style="background: #f8f9fa;">
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable"></tbody>
+                    </table>
+                </div>
+                <div id="noUsers" style="text-align: center; padding: 40px; color: #999;">No active users</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="adminLoginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1001; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 40px; border-radius: 15px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+            <h2 style="color: #667eea; margin-bottom: 20px;">🔐 Admin Login</h2>
+            
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" id="adminPassword" placeholder="Enter admin password" style="margin-bottom: 20px;">
+            </div>
+
+            <div class="button-group" style="gap: 10px;">
+                <button class="btn-primary" onclick="verifyAdminPassword()" style="flex: 1;">Login</button>
+                <button class="btn-secondary" onclick="closeAdminModal()" style="flex: 1;">Cancel</button>
+            </div>
+
+            <div id="adminLoginMsg" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <!-- Admin Button in Header -->
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 100;">
+        <button onclick="openAdminPanel()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 15px 20px; border-radius: 50px; cursor: pointer; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            🔐 Admin
+        </button>
+    </div>
+
     <script>
         let scrapedEmails = [];
         let generatedEmailDraft = '';
@@ -1296,15 +1426,255 @@ ${escapeHtml(generatedEmail)}
     </footer>
 
     <script>
-        // EasyPaisa Payment Handler
+        // ============ PAYMENT SYSTEM ============
+
+        // Open payment modal
         function initiateEasyPaisaPayment() {
-            alert('🚀 EasyPaisa Payment Integration\n\nAmount: Rs. 499\n\nIn a production environment, this would redirect to EasyPaisa payment gateway.\n\nFor now, please contact us for manual payment setup.\n\nEmail: your-email@example.com');
+            document.getElementById('paymentModal').style.display = 'flex';
         }
+
+        // Close payment modal
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.getElementById('transactionId').value = '';
+            document.getElementById('paymentEmail').value = '';
+            document.getElementById('paymentMsg').innerHTML = '';
+        }
+
+        // Submit payment
+        function submitPayment() {
+            const transactionId = document.getElementById('transactionId').value.trim();
+            const email = document.getElementById('paymentEmail').value.trim();
+
+            if (!transactionId || !email) {
+                showMessage('paymentMsg', 'Please fill in all fields', 'error');
+                return;
+            }
+
+            // Create payment record
+            const payment = {
+                id: Date.now(),
+                email: email,
+                transactionId: transactionId,
+                amount: 499,
+                status: 'pending',
+                date: new Date().toLocaleString(),
+                currency: 'PKR'
+            };
+
+            // Get existing payments from localStorage
+            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+            payments.push(payment);
+            localStorage.setItem('payments', JSON.stringify(payments));
+
+            showMessage('paymentMsg', '✅ Payment submitted! Waiting for admin confirmation...', 'success');
+            
+            setTimeout(() => {
+                closePaymentModal();
+                alert('📝 Your transaction has been recorded.\n\nTransaction ID: ' + transactionId + '\nStatus: Pending\n\nOur admin will confirm your payment within 24 hours.');
+            }, 1500);
+        }
+
+        // ============ ADMIN SYSTEM ============
+
+        const ADMIN_PASSWORD = '123456'; // Change this to a secure password
+
+        // Open admin panel
+        function openAdminPanel() {
+            const adminLoggedIn = localStorage.getItem('adminLoggedIn');
+            if (adminLoggedIn === 'true') {
+                document.getElementById('adminDashboard').style.display = 'block';
+                loadAdminData();
+            } else {
+                document.getElementById('adminLoginModal').style.display = 'flex';
+            }
+        }
+
+        // Verify admin password
+        function verifyAdminPassword() {
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                localStorage.setItem('adminLoggedIn', 'true');
+                document.getElementById('adminLoginModal').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                loadAdminData();
+                document.getElementById('adminPassword').value = '';
+            } else {
+                showMessage('adminLoginMsg', '❌ Incorrect password', 'error');
+            }
+        }
+
+        // Close admin modal
+        function closeAdminModal() {
+            document.getElementById('adminLoginModal').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        // Logout admin
+        function logoutAdmin() {
+            localStorage.setItem('adminLoggedIn', 'false');
+            document.getElementById('adminDashboard').style.display = 'none';
+            alert('Logged out successfully');
+        }
+
+        // Switch admin tabs
+        function switchAdminTab(tab, button) {
+            document.querySelectorAll('[id^="admin"]').forEach(el => {
+                if (el.id.startsWith('admin') && el.id !== 'adminDashboard' && el.id !== 'adminLoginModal') {
+                    el.style.display = 'none';
+                }
+            });
+            document.getElementById('admin' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.display = 'block';
+            
+            document.querySelectorAll('.tabs .tab-btn').forEach(btn => btn.style.borderColor = '');
+            button.style.borderColor = '#667eea';
+            button.style.borderBottomWidth = '3px';
+        }
+
+        // Load admin data
+        function loadAdminData() {
+            loadPaymentsData();
+            loadStatistics();
+            loadUsersData();
+        }
+
+        // Load payments data
+        function loadPaymentsData() {
+            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+            const paymentsList = document.getElementById('paymentsList');
+            const noPayments = document.getElementById('noPayments');
+
+            paymentsList.innerHTML = '';
+
+            if (payments.length === 0) {
+                noPayments.style.display = 'block';
+                return;
+            }
+
+            noPayments.style.display = 'none';
+
+            payments.forEach(payment => {
+                const row = document.createElement('tr');
+                const statusColor = payment.status === 'pending' ? '#ff9800' : payment.status === 'approved' ? '#4caf50' : '#f44336';
+                
+                row.innerHTML = `
+                    <td>${payment.email}</td>
+                    <td>${payment.transactionId}</td>
+                    <td>Rs. ${payment.amount}</td>
+                    <td>${payment.date}</td>
+                    <td style="color: ${statusColor}; font-weight: bold;">${payment.status.toUpperCase()}</td>
+                    <td>
+                        ${payment.status === 'pending' ? `
+                            <button onclick="approvePayment(${payment.id})" style="background: #4caf50; color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; margin-right: 5px;">✓ Approve</button>
+                            <button onclick="rejectPayment(${payment.id})" style="background: #f44336; color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;">✕ Reject</button>
+                        ` : `<span style="color: #999;">Processed</span>`}
+                    </td>
+                `;
+                paymentsList.appendChild(row);
+            });
+        }
+
+        // Approve payment
+        function approvePayment(paymentId) {
+            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+            payments = payments.map(p => {
+                if (p.id === paymentId) {
+                    p.status = 'approved';
+                    p.approvedDate = new Date().toLocaleString();
+                }
+                return p;
+            });
+            localStorage.setItem('payments', JSON.stringify(payments));
+            loadPaymentsData();
+            alert('✅ Payment approved!');
+        }
+
+        // Reject payment
+        function rejectPayment(paymentId) {
+            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+            payments = payments.map(p => {
+                if (p.id === paymentId) {
+                    p.status = 'rejected';
+                    p.rejectedDate = new Date().toLocaleString();
+                }
+                return p;
+            });
+            localStorage.setItem('payments', JSON.stringify(payments));
+            loadPaymentsData();
+            alert('❌ Payment rejected!');
+        }
+
+        // Load statistics
+        function loadStatistics() {
+            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+            let users = new Set(payments.map(p => p.email)).size;
+            let pending = payments.filter(p => p.status === 'pending').length;
+            let approved = payments.filter(p => p.status === 'approved').length;
+            let revenue = payments.filter(p => p.status === 'approved').reduce((sum, p) => sum + p.amount, 0);
+
+            document.getElementById('totalUsers').textContent = users;
+            document.getElementById('pendingPayments').textContent = pending;
+            document.getElementById('approvedPayments').textContent = approved;
+            document.getElementById('totalRevenue').textContent = 'Rs. ' + revenue.toLocaleString();
+        }
+
+        // Load users data
+        function loadUsersData() {
+            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+            const usersTable = document.getElementById('usersTable');
+            const noUsers = document.getElementById('noUsers');
+
+            usersTable.innerHTML = '';
+            let uniqueUsers = [];
+            let seenEmails = new Set();
+
+            payments.forEach(p => {
+                if (!seenEmails.has(p.email)) {
+                    seenEmails.add(p.email);
+                    uniqueUsers.push({
+                        email: p.email,
+                        status: p.status === 'approved' ? '✅ Premium' : '⏳ Pending',
+                        joined: p.date
+                    });
+                }
+            });
+
+            if (uniqueUsers.length === 0) {
+                noUsers.style.display = 'block';
+                return;
+            }
+
+            noUsers.style.display = 'none';
+
+            uniqueUsers.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.email}</td>
+                    <td>${user.status}</td>
+                    <td>${user.joined}</td>
+                `;
+                usersTable.appendChild(row);
+            });
+        }
+
+        // EasyPaisa Payment Handler (updated)
 
         // Enterprise Contact
         function contactEnterprise() {
             alert('📧 Enterprise Solutions\n\nContact us for custom pricing and features:\n\nGitHub: github.com/Muhammad-BinMushtaq\nLinkedIn: linkedin.com/in/muhammad-binmushtaq/');
         }
+
+        // Ensure admin is logged out on page load
+        window.addEventListener('load', function() {
+            // Initialize localStorage
+            if (!localStorage.getItem('payments')) {
+                localStorage.setItem('payments', '[]');
+            }
+            if (!localStorage.getItem('adminLoggedIn')) {
+                localStorage.setItem('adminLoggedIn', 'false');
+            }
+        });
     </script>
 </body>
 </html>
