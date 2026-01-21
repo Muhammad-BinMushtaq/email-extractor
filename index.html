@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EmailScrape Pro - Extract Emails Instantly</title>
+    <title>📧 Email Scraper & Campaign Manager</title>
     <style>
         * {
             margin: 0;
@@ -12,258 +12,184 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-            background: #0a0e27;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        /* Animated gradient background */
-        .gradient-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            opacity: 0.1;
-        }
-
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3), transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3), transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            padding: 20px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 1;
         }
 
-        /* Header */
         .header {
             text-align: center;
-            margin-bottom: 60px;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
-        }
-
-        .logo-text {
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            margin-bottom: 30px;
         }
 
         .header h1 {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .header p {
-            font-size: 1.3em;
-            color: #a5b4fc;
-            font-weight: 400;
+            font-size: 1.1em;
+            opacity: 0.9;
         }
 
-        /* Main Card */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         .card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Input Group */
-        .input-wrapper {
-            position: relative;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             margin-bottom: 30px;
         }
 
-        .input-label {
-            display: block;
-            color: #c7d2fe;
-            font-size: 0.9em;
-            font-weight: 600;
+        .card h2 {
+            color: #333;
             margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .input-group {
-            position: relative;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
-        .input-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            opacity: 0.5;
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            font-family: inherit;
         }
 
-        .input-group input {
-            width: 100%;
-            padding: 18px 18px 18px 55px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            font-size: 1.05em;
-            color: #ffffff;
-            transition: all 0.3s ease;
-        }
-
-        .input-group input:focus {
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.08);
             border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
         }
 
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
+        .input-group input[type="text"],
+        .input-group input[type="email"],
+        .input-group input[type="password"],
+        .input-group input[type="url"] {
+            flex: 1;
+            min-width: 200px;
         }
 
-        /* Button Group */
+        .input-group textarea {
+            width: 100%;
+            min-height: 120px;
+            resize: vertical;
+        }
+
         .button-group {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         button {
-            padding: 16px 28px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 1em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             font-weight: 600;
-            letter-spacing: 0.3px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        button:active::before {
-            width: 300px;
-            height: 300px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            flex: 1;
+            min-width: 150px;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: #c7d2fe;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #f0f0f0;
+            color: #333;
+            padding: 12px 20px;
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: #e0e0e0;
             transform: translateY(-2px);
         }
 
         .btn-secondary:disabled {
-            background: rgba(255, 255, 255, 0.02);
-            color: rgba(255, 255, 255, 0.3);
+            background: #ccc;
             cursor: not-allowed;
             transform: none;
         }
 
-        /* Loading */
+        .btn-success {
+            background: #4caf50;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #45a049;
+        }
+
         .loading {
             text-align: center;
-            padding: 50px;
+            padding: 30px;
+            color: #667eea;
             display: none;
         }
 
@@ -272,13 +198,13 @@
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
-            margin: 0 auto 20px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
+            border: 4px solid #f3f3f3;
             border-top: 4px solid #667eea;
             border-radius: 50%;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
         }
 
         @keyframes spin {
@@ -286,274 +212,405 @@
             100% { transform: rotate(360deg); }
         }
 
-        .loading p {
-            color: #a5b4fc;
-            font-size: 1.1em;
-        }
-
-        /* Messages */
         .message {
-            padding: 16px 20px;
-            border-radius: 12px;
+            padding: 15px;
+            border-radius: 8px;
             margin-bottom: 20px;
             display: none;
-            align-items: center;
-            gap: 12px;
-            animation: slideIn 0.4s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .message.active {
-            display: flex;
+            display: block;
         }
 
         .error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #fca5a5;
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #c62828;
         }
 
         .success {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            color: #86efac;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #2e7d32;
         }
 
-        /* Results Info */
+        .info {
+            background: #e3f2fd;
+            color: #1565c0;
+            border-left: 4px solid #1565c0;
+        }
+
         .results-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding: 20px;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(102, 126, 234, 0.2);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
         }
 
         .results-count {
-            font-size: 1.2em;
-            color: #e0e7ff;
+            font-size: 1.1em;
+            color: #333;
             font-weight: 600;
         }
 
         .results-count span {
-            color: #a78bfa;
-            font-size: 1.3em;
-            font-weight: 700;
+            color: #667eea;
         }
 
-        /* Table */
         .table-wrapper {
             overflow-x: auto;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
         }
 
         table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
         table thead {
-            background: rgba(102, 126, 234, 0.1);
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
         }
 
         table th {
-            padding: 18px 20px;
+            padding: 15px;
             text-align: left;
             font-weight: 600;
-            color: #c7d2fe;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+            color: #333;
         }
 
         table td {
-            padding: 16px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: #e0e7ff;
-        }
-
-        table tbody tr {
-            transition: all 0.3s ease;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         table tbody tr:hover {
-            background: rgba(102, 126, 234, 0.08);
+            background: #f8f9fa;
+        }
+
+        table tbody tr:nth-child(even) {
+            background: #fafafa;
         }
 
         .email-cell {
-            color: #a78bfa;
-            font-family: 'Monaco', monospace;
-            font-size: 0.95em;
+            color: #667eea;
+            word-break: break-all;
         }
 
-        .copy-btn {
-            background: rgba(102, 126, 234, 0.2);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            padding: 8px 16px;
-            border-radius: 8px;
+        .action-btn {
+            background: #e0e0e0;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 0.9em;
-            color: #c7d2fe;
             transition: all 0.3s;
         }
 
-        .copy-btn:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .action-btn:hover {
+            background: #667eea;
             color: white;
-            transform: scale(1.05);
         }
 
         .no-results {
             text-align: center;
-            padding: 60px 20px;
-            color: #6b7280;
+            padding: 40px 20px;
+            color: #999;
+            font-size: 1.1em;
         }
 
-        .no-results-icon {
-            font-size: 60px;
+        .email-draft {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.6;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             margin-bottom: 20px;
-            opacity: 0.3;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 60px;
-            padding: 30px;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9em;
+        .form-row.full {
+            grid-template-columns: 1fr;
         }
 
-        /* Responsive */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .send-results {
+            margin-top: 20px;
+        }
+
+        .send-result-item {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .send-result-item.sent {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+
+        .send-result-item.failed {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.5em;
-            }
-
-            .button-group {
+            .form-row {
                 grid-template-columns: 1fr;
             }
 
-            .card {
-                padding: 25px;
+            .tabs {
+                flex-direction: column;
             }
 
-            .results-info {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
+            .tab-btn {
+                width: 100%;
             }
 
             table {
                 font-size: 0.9em;
             }
+
+            table th, table td {
+                padding: 8px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="gradient-bg"></div>
-    
     <div class="container">
         <div class="header">
-            <div class="logo">
-                <div class="logo-icon">📧</div>
-                <div class="logo-text">EmailScrape Pro</div>
-            </div>
-            <h1>Extract Emails Instantly</h1>
-            <p>Powerful email extraction from any website</p>
+            <h1>📧 Email Scraper & Campaign Manager</h1>
+            <p>Extract emails, draft campaigns, and send outreach emails</p>
         </div>
 
-        <div class="card">
-            <div class="input-wrapper">
-                <label class="input-label">Website URL</label>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('scrape', this)">🔍 Scrape Emails</button>
+            <button class="tab-btn" onclick="switchTab('draft', this)">✍️ Draft Email</button>
+            <button class="tab-btn" onclick="switchTab('send', this)">📤 Send Campaign</button>
+        </div>
+
+        <!-- SCRAPE TAB -->
+        <div id="scrape" class="tab-content active">
+            <div class="card">
+                <h2>Web Scraper</h2>
+                <p style="color: #999; margin-bottom: 20px;">Extract email addresses from any website</p>
+
                 <div class="input-group">
-                    <span class="input-icon">🔗</span>
                     <input 
-                        type="text" 
+                        type="url" 
                         id="urlInput" 
-                        placeholder="https://example.com" 
-                        value=""
+                        placeholder="Enter website URL (e.g., https://example.com)" 
+                        value="https://www.uc3m.es/orientacionyempleo/somos#campusgetafe"
                     >
                 </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="scrapeEmails()">Scrape Emails</button>
+                    <button class="btn-secondary" id="exportBtn" onclick="exportToCSV()" disabled>📥 Export to CSV</button>
+                    <button class="btn-secondary" onclick="clearResults()">Clear</button>
+                </div>
+
+                <div class="message error" id="errorMsg"></div>
+                <div class="message success" id="successMsg"></div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Scraping website...</p>
+                </div>
+
+                <div id="results"></div>
             </div>
-
-            <div class="button-group">
-                <button class="btn-primary" id="scrapeBtn">🚀 Scrape Emails</button>
-                <button class="btn-secondary" id="exportBtn" disabled>📥 Export CSV</button>
-                <button class="btn-secondary" id="clearBtn">🗑️ Clear</button>
-            </div>
-
-            <div class="message error" id="errorMsg"></div>
-            <div class="message success" id="successMsg"></div>
-
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Analyzing website...</p>
-            </div>
-
-            <div id="results"></div>
         </div>
 
-        <div class="footer">
-            <p>🔒 Secure • 🚀 Fast • 💎 Premium Email Extraction</p>
+        <!-- DRAFT TAB -->
+        <div id="draft" class="tab-content">
+            <div class="card">
+                <h2>Email Draft Generator</h2>
+                <p style="color: #999; margin-bottom: 20px;">Generate professional email drafts</p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email Subject</label>
+                        <input type="text" id="emailSubject" placeholder="e.g., Partnership Opportunity">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Company</label>
+                        <input type="text" id="targetCompany" placeholder="e.g., Google, Microsoft">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email Purpose</label>
+                        <textarea id="emailPurpose" placeholder="e.g., Job inquiry, partnership proposal, sales pitch"></textarea>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="generateEmailDraft()">Generate Draft</button>
+                    <button class="btn-secondary" id="saveDraftBtn" onclick="saveDraftPrompt()" disabled>💾 Save Draft</button>
+                    <button class="btn-secondary" onclick="showLoadedDrafts()">📂 Load Draft</button>
+                </div>
+
+                <div class="message error" id="draftErrorMsg"></div>
+                <div class="message success" id="draftSuccessMsg"></div>
+
+                <div class="loading" id="draftLoading">
+                    <div class="spinner"></div>
+                    <p>Generating email...</p>
+                </div>
+
+                <div id="draftResult"></div>
+                <div id="savedDraftsPanel"></div>
+            </div>
+        </div>
+
+        <!-- SEND TAB -->
+        <div id="send" class="tab-content">
+            <div class="card">
+                <h2>Send Email Campaign</h2>
+                <p style="color: #999; margin-bottom: 20px;">Send emails to multiple recipients</p>
+
+                <div class="form-row" style="grid-template-columns: 1fr;">
+                    <div class="form-group">
+                        <label>Email Recipients (comma-separated)</label>
+                        <textarea id="recipientEmails" placeholder="email1@example.com, email2@example.com, email3@example.com" style="min-height: 100px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email Subject</label>
+                        <input type="text" id="sendSubject" placeholder="Email subject">
+                    </div>
+                </div>
+
+                <div class="form-row" style="grid-template-columns: 1fr;">
+                    <div class="form-group">
+                        <label>Email Body</label>
+                        <textarea id="sendBody" placeholder="Email content" style="min-height: 200px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Gmail Address</label>
+                        <input type="email" id="senderEmail" placeholder="your-email@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Gmail App Password</label>
+                        <input type="password" id="senderPassword" placeholder="App password (not regular password)">
+                    </div>
+                </div>
+
+                <div class="info message" style="display: block;">
+                    <strong>ℹ️ Note:</strong> Use Gmail App Password, not your regular password. 
+                    <a href="https://support.google.com/accounts/answer/185833" target="_blank" style="color: inherit; text-decoration: underline;">Generate one here</a>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="sendEmails()">Send Campaign</button>
+                    <button class="btn-secondary" onclick="pasteFromDraft()">📋 Use Draft</button>
+                </div>
+
+                <div class="message error" id="sendErrorMsg"></div>
+                <div class="message success" id="sendSuccessMsg"></div>
+
+                <div class="loading" id="sendLoading">
+                    <div class="spinner"></div>
+                    <p>Sending emails...</p>
+                </div>
+
+                <div class="send-results" id="sendResults"></div>
+            </div>
+        </div>
+
+        <div style="text-align: center; color: rgba(255, 255, 255, 0.8); margin-top: 30px; font-size: 0.9em;">
+            <p>Made with ❤️ using Node.js + ScrapingBee API</p>
         </div>
     </div>
 
     <script>
-        const urlInput = document.getElementById('urlInput');
-        const scrapeBtn = document.getElementById('scrapeBtn');
-        const exportBtn = document.getElementById('exportBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const loading = document.getElementById('loading');
-        const errorMsg = document.getElementById('errorMsg');
-        const successMsg = document.getElementById('successMsg');
-        const resultsDiv = document.getElementById('results');
-
         let scrapedEmails = [];
+        let generatedEmailDraft = '';
 
-        scrapeBtn.addEventListener('click', async () => {
-            const url = urlInput.value.trim();
+        // Tab switching
+        function switchTab(tabName, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+            btnElement.classList.add('active');
+        }
+
+        // Scrape emails
+        async function scrapeEmails() {
+            const url = document.getElementById('urlInput').value.trim();
 
             if (!url) {
-                showError('⚠️ Please enter a valid URL');
+                showMessage('errorMsg', 'Please enter a valid URL');
                 return;
             }
 
             if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                showError('⚠️ URL must start with http:// or https://');
+                showMessage('errorMsg', 'URL must start with http:// or https://');
                 return;
             }
 
-            scrapeEmails(url);
-        });
-
-        async function scrapeEmails(url) {
-            loading.classList.add('active');
-            errorMsg.classList.remove('active');
-            successMsg.classList.remove('active');
-            resultsDiv.innerHTML = '';
+            document.getElementById('loading').classList.add('active');
+            clearMessage('errorMsg');
+            clearMessage('successMsg');
+            document.getElementById('results').innerHTML = '';
 
             try {
                 const response = await fetch('/api/scrape', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ url })
                 });
 
@@ -566,35 +623,166 @@
                 scrapedEmails = data.emails || [];
 
                 if (scrapedEmails.length === 0) {
-                    showSuccess('✅ Scan complete - No emails found');
+                    showMessage('successMsg', 'No emails found on this website');
                     displayResults([]);
                 } else {
-                    showSuccess(`✅ Successfully extracted ${scrapedEmails.length} email(s)!`);
+                    showMessage('successMsg', `Successfully scraped ${scrapedEmails.length} email(s)!`);
                     displayResults(scrapedEmails);
-                    exportBtn.disabled = false;
+                    document.getElementById('exportBtn').disabled = false;
                 }
             } catch (error) {
-                showError('❌ Error: ' + error.message);
-                console.error('Scraping error:', error);
+                showMessage('errorMsg', 'Error: ' + error.message);
+                console.error('Error:', error);
             } finally {
-                loading.classList.remove('active');
+                document.getElementById('loading').classList.remove('active');
             }
         }
 
+        // Generate email draft
+        async function generateEmailDraft() {
+            const subject = document.getElementById('emailSubject').value.trim();
+            const company = document.getElementById('targetCompany').value.trim();
+            const purpose = document.getElementById('emailPurpose').value.trim();
+
+            if (!subject || !company || !purpose) {
+                showMessage('draftErrorMsg', 'Please fill in all fields');
+                return;
+            }
+
+            document.getElementById('draftLoading').classList.add('active');
+            clearMessage('draftErrorMsg');
+            clearMessage('draftSuccessMsg');
+
+            try {
+                const response = await fetch('/api/generate-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        subject, 
+                        targetCompany: company, 
+                        purpose 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to generate email');
+                }
+
+                generatedEmailDraft = data.emailDraft;
+                showMessage('draftSuccessMsg', 'Email draft generated successfully!');
+                
+                const draftHtml = `
+                    <div class="results-info">
+                        <div class="results-count">Subject: <span>${escapeHtml(data.subject)}</span></div>
+                    </div>
+                    <div class="email-draft">${escapeHtml(generatedEmailDraft)}</div>
+                    <button class="btn-primary" onclick="copyDraftToSend()">📋 Use in Campaign</button>
+                `;
+                document.getElementById('draftResult').innerHTML = draftHtml;
+            } catch (error) {
+                showMessage('draftErrorMsg', 'Error: ' + error.message);
+            } finally {
+                document.getElementById('draftLoading').classList.remove('active');
+            }
+        }
+
+        // Copy draft to send section
+        function copyDraftToSend() {
+            const subject = document.getElementById('emailSubject').value;
+            document.getElementById('sendSubject').value = subject;
+            document.getElementById('sendBody').value = generatedEmailDraft;
+            document.getElementById('send').classList.add('active');
+            document.getElementById('scrape').classList.remove('active');
+            document.getElementById('draft').classList.remove('active');
+            showMessage('sendSuccessMsg', 'Draft copied to campaign section!');
+        }
+
+        // Paste from draft
+        function pasteFromDraft() {
+            if (!generatedEmailDraft) {
+                showMessage('sendErrorMsg', 'Generate a draft first in the Draft Email tab');
+                return;
+            }
+            copyDraftToSend();
+        }
+
+        // Send emails
+        async function sendEmails() {
+            const emailsText = document.getElementById('recipientEmails').value.trim();
+            const subject = document.getElementById('sendSubject').value.trim();
+            const body = document.getElementById('sendBody').value.trim();
+            const senderEmail = document.getElementById('senderEmail').value.trim();
+            const senderPassword = document.getElementById('senderPassword').value.trim();
+
+            if (!emailsText || !subject || !body || !senderEmail || !senderPassword) {
+                showMessage('sendErrorMsg', 'Please fill in all fields');
+                return;
+            }
+
+            const emailAddresses = emailsText.split(',').map(e => e.trim()).filter(e => e);
+
+            if (emailAddresses.length === 0) {
+                showMessage('sendErrorMsg', 'Please enter valid email addresses');
+                return;
+            }
+
+            document.getElementById('sendLoading').classList.add('active');
+            clearMessage('sendErrorMsg');
+            clearMessage('sendSuccessMsg');
+            document.getElementById('sendResults').innerHTML = '';
+
+            try {
+                const response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        emailAddresses,
+                        subject,
+                        emailBody: body,
+                        senderEmail,
+                        senderPassword
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to send emails');
+                }
+
+                showMessage('sendSuccessMsg', 
+                    `Campaign sent! ${data.totalSent} sent, ${data.totalFailed} failed`);
+
+                const resultsHtml = data.results.map(result => `
+                    <div class="send-result-item ${result.status}">
+                        <div>
+                            <strong>${escapeHtml(result.email)}</strong>
+                            <br>
+                            <small>${result.status === 'sent' ? '✓ Sent' : '✗ Failed: ' + result.error}</small>
+                        </div>
+                    </div>
+                `).join('');
+
+                document.getElementById('sendResults').innerHTML = resultsHtml;
+            } catch (error) {
+                showMessage('sendErrorMsg', 'Error: ' + error.message);
+            } finally {
+                document.getElementById('sendLoading').classList.remove('active');
+            }
+        }
+
+        // Display results
         function displayResults(emails) {
             if (emails.length === 0) {
-                resultsDiv.innerHTML = `
-                    <div class="no-results">
-                        <div class="no-results-icon">📭</div>
-                        <p>No emails found on this page</p>
-                    </div>
-                `;
+                document.getElementById('results').innerHTML = '<div class="no-results">No emails found</div>';
                 return;
             }
 
             let html = `
                 <div class="results-info">
-                    <div class="results-count">Found <span>${emails.length}</span> email${emails.length > 1 ? 's' : ''}</div>
+                    <div class="results-count">Found <span>${emails.length}</span> email(s)</div>
                 </div>
                 <div class="table-wrapper">
                     <table>
@@ -614,36 +802,20 @@
                         <td>${index + 1}</td>
                         <td class="email-cell">${escapeHtml(email)}</td>
                         <td>
-                            <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(email)}')">
-                                📋 Copy
-                            </button>
+                            <button class="action-btn" onclick="copyToClipboard('${escapeHtml(email)}')">📋 Copy</button>
                         </td>
                     </tr>
                 `;
             });
 
-            html += `
-                        </tbody>
-                    </table>
-                </div>
-            `;
-
-            resultsDiv.innerHTML = html;
+            html += `</tbody></table></div>`;
+            document.getElementById('results').innerHTML = html;
         }
 
-        function showError(message) {
-            errorMsg.textContent = message;
-            errorMsg.classList.add('active');
-        }
-
-        function showSuccess(message) {
-            successMsg.textContent = message;
-            successMsg.classList.add('active');
-        }
-
-        exportBtn.addEventListener('click', () => {
+        // Export to CSV
+        function exportToCSV() {
             if (scrapedEmails.length === 0) {
-                showError('❌ No emails to export');
+                showMessage('errorMsg', 'No emails to export');
                 return;
             }
 
@@ -655,35 +827,41 @@
                 csv += `"${email}","${currentDate}"\n`;
             });
 
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const blob = new Blob([csv], { type: 'text/csv' });
             const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            
-            link.setAttribute('href', url);
-            link.setAttribute('download', `emails_${new Date().getTime()}.csv`);
-            link.style.visibility = 'hidden';
-            
+            link.href = URL.createObjectURL(blob);
+            link.download = `emails_${new Date().getTime()}.csv`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
 
-            showSuccess('✅ CSV exported successfully!');
-        });
+            showMessage('successMsg', 'CSV exported successfully!');
+        }
 
-        clearBtn.addEventListener('click', () => {
-            resultsDiv.innerHTML = '';
+        // Utility functions
+        function showMessage(elementId, message) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.classList.add('active');
+        }
+
+        function clearMessage(elementId) {
+            const el = document.getElementById(elementId);
+            el.classList.remove('active');
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
             scrapedEmails = [];
-            urlInput.value = '';
-            exportBtn.disabled = true;
-            errorMsg.classList.remove('active');
-            successMsg.classList.remove('active');
-        });
+            document.getElementById('urlInput').value = '';
+            document.getElementById('exportBtn').disabled = true;
+            clearMessage('errorMsg');
+            clearMessage('successMsg');
+        }
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                showSuccess('✅ Email copied to clipboard!');
-            }).catch(() => {
-                showError('❌ Failed to copy');
+                showMessage('successMsg', 'Email copied to clipboard!');
             });
         }
 
@@ -693,11 +871,143 @@
             return div.innerHTML;
         }
 
-        urlInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                scrapeBtn.click();
+        // Save draft function
+        function saveDraftPrompt() {
+            if (!generatedEmailDraft) {
+                showMessage('draftErrorMsg', 'Generate a draft first before saving');
+                return;
             }
-        });
+
+            const subject = document.getElementById('emailSubject').value.trim();
+            if (!subject) {
+                showMessage('draftErrorMsg', 'Subject is required to save');
+                return;
+            }
+
+            const filename = prompt('Enter a name to save this draft:', subject);
+            if (!filename) return;
+
+            saveDraft(subject, generatedEmailDraft, filename);
+        }
+
+        // Save draft to server
+        async function saveDraft(subject, emailBody, filename) {
+            try {
+                const response = await fetch('/api/save-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        subject,
+                        emailBody,
+                        filename
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to save draft');
+                }
+
+                showMessage('draftSuccessMsg', `✅ Draft saved as "${filename}"`);
+            } catch (error) {
+                showMessage('draftErrorMsg', 'Error: ' + error.message);
+            }
+        }
+
+        // Show loaded drafts
+        async function showLoadedDrafts() {
+            try {
+                const response = await fetch('/api/saved-emails');
+                const data = await response.json();
+
+                if (!response.ok || !data.emails) {
+                    showMessage('draftErrorMsg', 'No saved drafts found');
+                    return;
+                }
+
+                if (data.emails.length === 0) {
+                    showMessage('draftErrorMsg', 'No saved drafts yet. Generate and save one first!');
+                    return;
+                }
+
+                let html = '<div style="margin-top: 30px;"><h3 style="color: #333; margin-bottom: 15px;">📂 Your Saved Drafts</h3>';
+                html += '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">';
+
+                data.emails.forEach(email => {
+                    html += `
+                        <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 10px;">${escapeHtml(email.filename)}</div>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="action-btn" onclick="loadDraft('${email.filename}')" style="flex: 1;">📥 Load</button>
+                                <button class="action-btn" onclick="deleteDraft('${email.filename}')" style="flex: 1; background: #f44336; color: white;">🗑️ Delete</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += '</div></div>';
+                document.getElementById('savedDraftsPanel').innerHTML = html;
+            } catch (error) {
+                showMessage('draftErrorMsg', 'Error: ' + error.message);
+            }
+        }
+
+        // Load draft
+        async function loadDraft(filename) {
+            try {
+                const response = await fetch(`/api/load-email/${filename}`);
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to load draft');
+                }
+
+                generatedEmailDraft = data.email.body;
+                document.getElementById('emailSubject').value = data.email.subject;
+                document.getElementById('sendSubject').value = data.email.subject;
+                document.getElementById('sendBody').value = data.email.body;
+
+                // Display the loaded draft
+                const draftHtml = `
+                    <div class="results-info">
+                        <div class="results-count">Subject: <span>${escapeHtml(data.email.subject)}</span></div>
+                    </div>
+                    <div class="email-draft">${escapeHtml(generatedEmailDraft)}</div>
+                    <button class="btn-primary" onclick="copyDraftToSend()">📋 Use in Campaign</button>
+                `;
+                document.getElementById('draftResult').innerHTML = draftHtml;
+                document.getElementById('saveDraftBtn').disabled = false;
+
+                showMessage('draftSuccessMsg', `✅ Draft "${filename}" loaded successfully`);
+            } catch (error) {
+                showMessage('draftErrorMsg', 'Error: ' + error.message);
+            }
+        }
+
+        // Delete draft
+        async function deleteDraft(filename) {
+            if (!confirm(`Are you sure you want to delete "${filename}"?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/delete-email/${filename}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to delete draft');
+                }
+
+                showMessage('draftSuccessMsg', `✅ Draft "${filename}" deleted`);
+                showLoadedDrafts(); // Refresh the list
+            } catch (error) {
+                showMessage('draftErrorMsg', 'Error: ' + error.message);
+            }
+        }
     </script>
 </body>
 </html>
