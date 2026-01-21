@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Scraper - Beautiful UI</title>
+    <title>EmailScrape Pro - Extract Emails Instantly</title>
     <style>
         * {
             margin: 0;
@@ -12,115 +12,258 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: #0a0e27;
             min-height: 100vh;
-            padding: 20px;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            opacity: 0.1;
+        }
+
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3), transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3), transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
         }
 
+        /* Header */
         .header {
             text-align: center;
-            color: white;
-            margin-bottom: 30px;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin-bottom: 30px;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 10px;
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
             margin-bottom: 20px;
         }
 
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #a5b4fc;
+            font-weight: 400;
+        }
+
+        /* Main Card */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Input Group */
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            display: block;
+            color: #c7d2fe;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            opacity: 0.5;
+        }
+
         .input-group input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s;
+            width: 100%;
+            padding: 18px 18px 18px 55px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 1.05em;
+            color: #ffffff;
+            transition: all 0.3s ease;
         }
 
         .input-group input:focus {
             outline: none;
+            background: rgba(255, 255, 255, 0.08);
             border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
         }
 
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Button Group */
         .button-group {
-            display: flex;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 30px;
         }
 
         button {
-            padding: 12px 25px;
+            padding: 16px 28px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1em;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:active::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            flex: 1;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
         }
 
         .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
-            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #c7d2fe;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .btn-secondary:hover {
-            background: #e0e0e0;
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-2px);
         }
 
         .btn-secondary:disabled {
-            background: #ccc;
+            background: rgba(255, 255, 255, 0.02);
+            color: rgba(255, 255, 255, 0.3);
             cursor: not-allowed;
             transform: none;
         }
 
+        /* Loading */
         .loading {
             text-align: center;
-            padding: 30px;
-            color: #667eea;
+            padding: 50px;
             display: none;
         }
 
@@ -129,13 +272,13 @@
         }
 
         .spinner {
-            border: 4px solid #f3f3f3;
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
             border-top: 4px solid #667eea;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
         }
 
         @keyframes spin {
@@ -143,188 +286,231 @@
             100% { transform: rotate(360deg); }
         }
 
-        .error {
-            background: #ffebee;
-            color: #c62828;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
+        .loading p {
+            color: #a5b4fc;
+            font-size: 1.1em;
         }
 
-        .error.active {
-            display: block;
+        /* Messages */
+        .message {
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message.active {
+            display: flex;
+        }
+
+        .error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
         }
 
         .success {
-            background: #e8f5e9;
-            color: #2e7d32;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #86efac;
         }
 
-        .success.active {
-            display: block;
-        }
-
+        /* Results Info */
         .results-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
         }
 
         .results-count {
-            font-size: 1.1em;
-            color: #333;
+            font-size: 1.2em;
+            color: #e0e7ff;
             font-weight: 600;
         }
 
         .results-count span {
-            color: #667eea;
+            color: #a78bfa;
+            font-size: 1.3em;
+            font-weight: 700;
         }
 
+        /* Table */
         .table-wrapper {
             overflow-x: auto;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+            border-collapse: separate;
+            border-spacing: 0;
         }
 
         table thead {
-            background: #f8f9fa;
-            border-bottom: 2px solid #e0e0e0;
+            background: rgba(102, 126, 234, 0.1);
         }
 
         table th {
-            padding: 15px;
+            padding: 18px 20px;
             text-align: left;
             font-weight: 600;
-            color: #333;
+            color: #c7d2fe;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.2);
         }
 
         table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #e0e7ff;
+        }
+
+        table tbody tr {
+            transition: all 0.3s ease;
         }
 
         table tbody tr:hover {
-            background: #f8f9fa;
-        }
-
-        table tbody tr:nth-child(even) {
-            background: #fafafa;
+            background: rgba(102, 126, 234, 0.08);
         }
 
         .email-cell {
-            color: #667eea;
-            word-break: break-all;
+            color: #a78bfa;
+            font-family: 'Monaco', monospace;
+            font-size: 0.95em;
         }
 
         .copy-btn {
-            background: #e0e0e0;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 8px 16px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.9em;
+            color: #c7d2fe;
             transition: all 0.3s;
         }
 
         .copy-btn:hover {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            transform: scale(1.05);
         }
 
         .no-results {
             text-align: center;
-            padding: 40px 20px;
-            color: #999;
-            font-size: 1.1em;
+            padding: 60px 20px;
+            color: #6b7280;
         }
 
-        .no-results svg {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 15px;
-            opacity: 0.5;
+        .no-results-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: 0.3;
         }
 
+        /* Footer */
         .footer {
             text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 30px;
+            margin-top: 60px;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.4);
             font-size: 0.9em;
         }
 
-        @media (max-width: 600px) {
-            .input-group {
-                flex-direction: column;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
             }
 
             .button-group {
-                flex-direction: column;
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 25px;
             }
 
             .results-info {
                 flex-direction: column;
+                gap: 15px;
                 align-items: flex-start;
-                gap: 10px;
             }
 
             table {
                 font-size: 0.9em;
             }
-
-            table th, table td {
-                padding: 10px;
-            }
         }
     </style>
 </head>
 <body>
+    <div class="gradient-bg"></div>
+    
     <div class="container">
         <div class="header">
-            <h1>📧 Email Scraper</h1>
-            <p>Extract and manage emails beautifully</p>
+            <div class="logo">
+                <div class="logo-icon">📧</div>
+                <div class="logo-text">EmailScrape Pro</div>
+            </div>
+            <h1>Extract Emails Instantly</h1>
+            <p>Powerful email extraction from any website</p>
         </div>
 
         <div class="card">
-            <div class="input-group">
-                <input 
-                    type="text" 
-                    id="urlInput" 
-                    placeholder="Enter website URL (e.g., https://example.com)" 
-                    value="https://www.uc3m.es/orientacionyempleo/somos#campusgetafe"
-                >
+            <div class="input-wrapper">
+                <label class="input-label">Website URL</label>
+                <div class="input-group">
+                    <span class="input-icon">🔗</span>
+                    <input 
+                        type="text" 
+                        id="urlInput" 
+                        placeholder="https://example.com" 
+                        value=""
+                    >
+                </div>
             </div>
 
             <div class="button-group">
-                <button class="btn-primary" id="scrapeBtn">Scrape Emails</button>
-                <button class="btn-secondary" id="exportBtn" disabled>📥 Export to CSV</button>
-                <button class="btn-secondary" id="clearBtn">Clear Results</button>
+                <button class="btn-primary" id="scrapeBtn">🚀 Scrape Emails</button>
+                <button class="btn-secondary" id="exportBtn" disabled>📥 Export CSV</button>
+                <button class="btn-secondary" id="clearBtn">🗑️ Clear</button>
             </div>
 
-            <div class="error" id="errorMsg"></div>
-            <div class="success" id="successMsg"></div>
+            <div class="message error" id="errorMsg"></div>
+            <div class="message success" id="successMsg"></div>
 
             <div class="loading" id="loading">
                 <div class="spinner"></div>
-                <p>Scraping website...</p>
+                <p>Analyzing website...</p>
             </div>
 
             <div id="results"></div>
         </div>
 
         <div class="footer">
-            <p>Powered by ScrapingBee API | Built with ❤️</p>
+            <p>🔒 Secure • 🚀 Fast • 💎 Premium Email Extraction</p>
         </div>
     </div>
 
@@ -340,17 +526,16 @@
 
         let scrapedEmails = [];
 
-        // Scrape emails
         scrapeBtn.addEventListener('click', async () => {
             const url = urlInput.value.trim();
 
             if (!url) {
-                showError('Please enter a valid URL');
+                showError('⚠️ Please enter a valid URL');
                 return;
             }
 
             if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                showError('URL must start with http:// or https://');
+                showError('⚠️ URL must start with http:// or https://');
                 return;
             }
 
@@ -378,19 +563,18 @@
                     throw new Error(data.error || 'Failed to scrape website');
                 }
 
-                // Parse emails from response
                 scrapedEmails = data.emails || [];
 
                 if (scrapedEmails.length === 0) {
-                    showSuccess('No emails found on this website');
+                    showSuccess('✅ Scan complete - No emails found');
                     displayResults([]);
                 } else {
-                    showSuccess(`Successfully scraped ${scrapedEmails.length} email(s)!`);
+                    showSuccess(`✅ Successfully extracted ${scrapedEmails.length} email(s)!`);
                     displayResults(scrapedEmails);
                     exportBtn.disabled = false;
                 }
             } catch (error) {
-                showError('Error: ' + error.message);
+                showError('❌ Error: ' + error.message);
                 console.error('Scraping error:', error);
             } finally {
                 loading.classList.remove('active');
@@ -399,13 +583,18 @@
 
         function displayResults(emails) {
             if (emails.length === 0) {
-                resultsDiv.innerHTML = '<div class="no-results">No emails found</div>';
+                resultsDiv.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">📭</div>
+                        <p>No emails found on this page</p>
+                    </div>
+                `;
                 return;
             }
 
             let html = `
                 <div class="results-info">
-                    <div class="results-count">Found <span>${emails.length}</span> email(s)</div>
+                    <div class="results-count">Found <span>${emails.length}</span> email${emails.length > 1 ? 's' : ''}</div>
                 </div>
                 <div class="table-wrapper">
                     <table>
@@ -452,22 +641,17 @@
             successMsg.classList.add('active');
         }
 
-        // Export to CSV
         exportBtn.addEventListener('click', () => {
             if (scrapedEmails.length === 0) {
-                showError('No emails to export');
+                showError('❌ No emails to export');
                 return;
             }
 
-            exportToCSV(scrapedEmails);
-        });
-
-        function exportToCSV(emails) {
             const headers = ['Email Address', 'Scraped Date'];
             const currentDate = new Date().toLocaleString();
             
             let csv = headers.join(',') + '\n';
-            emails.forEach(email => {
+            scrapedEmails.forEach(email => {
                 csv += `"${email}","${currentDate}"\n`;
             });
 
@@ -483,10 +667,9 @@
             link.click();
             document.body.removeChild(link);
 
-            showSuccess('CSV exported successfully!');
-        }
+            showSuccess('✅ CSV exported successfully!');
+        });
 
-        // Clear results
         clearBtn.addEventListener('click', () => {
             resultsDiv.innerHTML = '';
             scrapedEmails = [];
@@ -496,23 +679,20 @@
             successMsg.classList.remove('active');
         });
 
-        // Copy to clipboard
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                showSuccess('Email copied to clipboard!');
+                showSuccess('✅ Email copied to clipboard!');
             }).catch(() => {
-                showError('Failed to copy');
+                showError('❌ Failed to copy');
             });
         }
 
-        // Escape HTML to prevent XSS
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // Allow Enter key to scrape
         urlInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 scrapeBtn.click();
