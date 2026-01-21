@@ -15,6 +15,31 @@ const app = express();
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
+// Simple API rate limiting (optional API key check)
+const DEMO_API_KEYS = {
+    'free': { limit: 10, period: 'day' }, // 10 scrapes per day for free
+    'premium': { limit: null, period: null } // Unlimited for premium
+};
+
+// Middleware to check API key and rate limit
+let requestCounts = {};
+app.use((req, res, next) => {
+    const apiKey = req.query.apiKey || req.headers['x-api-key'] || 'free';
+    const today = new Date().toDateString();
+    const key = `${apiKey}-${today}`;
+    
+    requestCounts[key] = (requestCounts[key] || 0) + 1;
+    
+    // Check rate limit for free tier
+    if (apiKey === 'free' && requestCounts[key] > 10) {
+        return res.status(429).json({ 
+            error: 'Rate limit exceeded. Free plan allows 10 requests per day. Upgrade to Premium for unlimited access.' 
+        });
+    }
+    
+    next();
+});
+
 // Scraping function using axios
 async function scrapeEmails(url) {
     try {

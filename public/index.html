@@ -1242,5 +1242,69 @@ ${escapeHtml(generatedEmail)}
             }
         }
     </script>
+
+    <!-- FOOTER & PAYMENT SECTION -->
+    <footer style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin-top: 50px; padding: 40px 20px; border-radius: 15px 15px 0 0;">
+        <div class="container">
+            <!-- Payment Section -->
+            <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 10px; margin-bottom: 30px; backdrop-filter: blur(10px);">
+                <h3 style="margin-bottom: 20px; text-align: center;">💳 Upgrade to Premium</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; text-align: center;">
+                        <h4>Free Plan</h4>
+                        <p style="font-size: 2em; margin: 10px 0;">Free</p>
+                        <p>✅ Email Scraping (10/day)<br>✅ Email Drafts<br>✅ Compose Templates</p>
+                        <button class="btn-primary" style="width: 100%;">Current Plan</button>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 8px; text-align: center; border: 2px solid #FFD700;">
+                        <h4>⭐ Premium</h4>
+                        <p style="font-size: 2em; margin: 10px 0;">Rs. 499</p>
+                        <p>✅ Unlimited Scraping<br>✅ Bulk Send (100/month)<br>✅ Priority Support</p>
+                        <button class="btn-primary" style="width: 100%; background: #FFD700; color: #667eea;" onclick="initiateEasyPaisaPayment()">Pay with EasyPaisa</button>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; text-align: center;">
+                        <h4>🚀 Enterprise</h4>
+                        <p style="font-size: 2em; margin: 10px 0;">Custom</p>
+                        <p>✅ Everything<br>✅ API Access<br>✅ Dedicated Support</p>
+                        <button class="btn-primary" style="width: 100%;" onclick="contactEnterprise()">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Credits Section -->
+            <div style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 30px; text-align: center;">
+                <h4 style="margin-bottom: 20px;">👨‍💻 Made by Muhammad Bin Mushtaq</h4>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+                    <a href="https://github.com/Muhammad-BinMushtaq" target="_blank" style="color: white; text-decoration: none; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; transition: all 0.3s;">
+                        🔗 GitHub
+                    </a>
+                    <a href="https://muhammadcode.netlify.app/" target="_blank" style="color: white; text-decoration: none; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; transition: all 0.3s;">
+                        🌐 Portfolio
+                    </a>
+                    <a href="https://www.linkedin.com/in/muhammad-binmushtaq/" target="_blank" style="color: white; text-decoration: none; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 5px; transition: all 0.3s;">
+                        💼 LinkedIn
+                    </a>
+                </div>
+                <p style="opacity: 0.8; margin-bottom: 15px;">📧 Free Plan: Scrape up to 10 emails per day • Send 20 emails/month</p>
+                <p style="font-size: 0.9em; opacity: 0.6;">
+                    ⚠️ API Protection: All APIs are currently public. We recommend not sharing your links with untrusted sources.<br>
+                    For production use, implement API keys and rate limiting.
+                </p>
+                <p style="margin-top: 20px; opacity: 0.7;">© 2026 Email Campaign Manager. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // EasyPaisa Payment Handler
+        function initiateEasyPaisaPayment() {
+            alert('🚀 EasyPaisa Payment Integration\n\nAmount: Rs. 499\n\nIn a production environment, this would redirect to EasyPaisa payment gateway.\n\nFor now, please contact us for manual payment setup.\n\nEmail: your-email@example.com');
+        }
+
+        // Enterprise Contact
+        function contactEnterprise() {
+            alert('📧 Enterprise Solutions\n\nContact us for custom pricing and features:\n\nGitHub: github.com/Muhammad-BinMushtaq\nLinkedIn: linkedin.com/in/muhammad-binmushtaq/');
+        }
+    </script>
 </body>
 </html>
