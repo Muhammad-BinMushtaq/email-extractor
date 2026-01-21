@@ -14,27 +14,48 @@ A professional email scraping, drafting, and campaign management platform. Extra
 
 ### Core Features
 - ✅ **Email Scraping** - Extract emails from any website using regex
-- ✅ **Email Composition** - 9 professional templates by category (Principal, Professor, University, HR, CTO, Investor, etc.)
-- ✅ **Email Drafting** - Generate email drafts with AI-powered templates
-- ✅ **Bulk Email Sending** - Send campaigns to multiple recipients (Gmail integration)
-- ✅ **Draft Management** - Save, load, and organize email drafts
-- ✅ **Responsive Design** - Mobile-friendly interface
+- ✅ **Email Composition** - 9 professional templates by category (Principal, Professor, University, HR, CTO, Investor, Media, Business, Vendor)
+- ✅ **Email Drafting** - Generate customizable email drafts with templates
+- ✅ **Bulk Email Sending** - Send campaigns to multiple recipients (Gmail SMTP)
+- ✅ **Draft Management** - Save, load, and organize email drafts in localStorage
+- ✅ **Professional UI** - Modern, responsive design with sidebar navigation
+- ✅ **Search Limits** - Free users get 3 searches/day, upgradeable to premium
+- ✅ **Google Authentication** - Sign in with Google (stored in localStorage)
+- ✅ **Admin Dashboard** - Manage payments, approve transactions, view analytics
+- ✅ **Payment Integration** - EasyPaisa payment modal with transaction tracking
+
+### Premium Features
+- 🎯 **Unlimited Scraping** - No daily search limits
+- 🎯 **Advanced Analytics** - User activity tracking
+- 🎯 **Priority Support** - Faster response times
+- 🎯 **Custom Templates** - Create your own email templates
+- 🎯 **API Access** - Programmatic access to all features
 
 ### Pricing Tiers
-- **Free**: 10 email scrapes/day, 20 emails/month
+- **Free**: 3 email scrapes/day, basic features
 - **Premium**: Unlimited scraping, 100 emails/month - Rs. 499 (EasyPaisa)
-- **Enterprise**: Custom pricing with API access
+- **Enterprise**: Custom pricing with API access and dedicated support
 
 ---
 
 ## 🛠️ Tech Stack
 
 - **Backend**: Node.js + Express.js (Vercel serverless)
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript
-- **Email Scraping**: Regex-based extraction (axios)
-- **Email Sending**: Nodemailer (Gmail SMTP)
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript (no frameworks)
+- **Email Scraping**: Regex-based extraction (axios library)
+- **Email Sending**: Nodemailer (Gmail SMTP authentication)
+- **Authentication**: Google Sign-In (client-side, localStorage)
+- **Data Storage**: localStorage (MVP), PostgreSQL + Prisma (production-ready)
 - **Deployment**: Vercel (serverless functions)
 - **Package Manager**: npm
+
+### Planned Upgrades
+- PostgreSQL database for user data persistence
+- Prisma ORM for type-safe queries
+- JWT token-based authentication
+- Refresh token rotation for security
+- Email verification with OTP
+- 2FA support
 
 ---
 
@@ -42,7 +63,8 @@ A professional email scraping, drafting, and campaign management platform. Extra
 
 - Node.js (v14 or higher)
 - npm
-- Gmail account with app-specific password (for email sending)
+- Gmail account with app-specific password (for sending emails)
+- Internet connection (for email scraping)
 
 ---
 
