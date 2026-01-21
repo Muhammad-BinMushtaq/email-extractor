@@ -427,6 +427,7 @@
 
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('scrape', this)">🔍 Scrape Emails</button>
+            <button class="tab-btn" onclick="switchTab('compose', this)">📝 Compose Email</button>
             <button class="tab-btn" onclick="switchTab('draft', this)">✍️ Draft Email</button>
             <button class="tab-btn" onclick="switchTab('send', this)">📤 Send Campaign</button>
         </div>
@@ -461,6 +462,50 @@
                 </div>
 
                 <div id="results"></div>
+            </div>
+        </div>
+
+        <!-- COMPOSE EMAIL TAB -->
+        <div id="compose" class="tab-content">
+            <div class="card">
+                <h2>Compose Email by Category</h2>
+                <p style="color: #999; margin-bottom: 20px;">Select a category to get pre-formatted email templates</p>
+
+                <div class="form-group">
+                    <label>Email Category:</label>
+                    <select id="emailCategory" onchange="loadCategoryTemplate()">
+                        <option value="">-- Select Category --</option>
+                        <option value="principal">🎓 Principal/Headmaster</option>
+                        <option value="professor">👨‍🏫 Professor/Teacher</option>
+                        <option value="university">🏫 University/Institution</option>
+                        <option value="hr">💼 HR/Recruiter</option>
+                        <option value="cto">🖥️ CTO/Tech Lead</option>
+                        <option value="investor">💰 Investor/VC</option>
+                        <option value="client">🤝 Business Client</option>
+                        <option value="vendor">📦 Vendor/Supplier</option>
+                        <option value="media">📰 Media/Press</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Recipient Name:</label>
+                    <input type="text" id="recipientName" placeholder="e.g., Dr. Smith, Prof. Johnson">
+                </div>
+
+                <div class="form-group">
+                    <label>Your Purpose/Subject:</label>
+                    <input type="text" id="composePurpose" placeholder="e.g., Internship Inquiry, Partnership Proposal">
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="generateCategoryEmail()">Generate Email</button>
+                </div>
+
+                <div id="composeMsg" style="margin-top: 20px;"></div>
+
+                <div id="composeResult" style="margin-top: 20px;">
+                    <div id="composedEmail" class="email-draft" style="display:none; margin-top: 15px;"></div>
+                </div>
             </div>
         </div>
 
@@ -686,6 +731,194 @@
             } finally {
                 document.getElementById('draftLoading').classList.remove('active');
             }
+        }
+
+        // Email templates by category
+        const emailTemplates = {
+            principal: {
+                name: "Principal/Headmaster",
+                templates: (name, purpose) => `Dear Dr. ${name},
+
+I hope this message finds you well. I am writing to express my interest in ${purpose} at your esteemed institution.
+
+With my strong commitment to educational excellence and proven track record in [your field], I believe I can contribute significantly to your school's mission and vision.
+
+I would greatly appreciate the opportunity to discuss how I can support your institution in achieving its goals. I am available at your convenience for a meeting.
+
+Thank you for considering my request. I look forward to hearing from you.
+
+Warm regards,
+[Your Name]`
+            },
+            professor: {
+                name: "Professor/Teacher",
+                templates: (name, purpose) => `Dear Prof. ${name},
+
+I hope you are well. I am writing regarding ${purpose} and would be grateful for your expertise and guidance.
+
+Your pioneering work in [field] has been instrumental in shaping my academic interests. I believe our shared commitment to [topic] could lead to a meaningful collaboration.
+
+Would you have time in the coming weeks for a brief discussion? I would be honored to learn from your insights.
+
+Thank you for considering my request.
+
+Best regards,
+[Your Name]`
+            },
+            university: {
+                name: "University/Institution",
+                templates: (name, purpose) => `Dear [University Name] Team,
+
+I hope this email finds you in good spirits. I am reaching out regarding ${purpose} with your prestigious institution.
+
+Your university's outstanding reputation for excellence aligns perfectly with my goals and values. I am confident that [your background/skills] would be a valuable addition to your community.
+
+I would welcome the opportunity to discuss how I can contribute to your institution's continued success.
+
+Thank you for your time and consideration.
+
+Sincerely,
+[Your Name]`
+            },
+            hr: {
+                name: "HR/Recruiter",
+                templates: (name, purpose) => `Dear ${name}/Hiring Team,
+
+I hope this message finds you well. I am writing to express my strong interest in ${purpose} at your organization.
+
+With my proven expertise in [skills/experience], combined with my passion for [relevant field], I am confident I can deliver significant value to your team from day one.
+
+I would be delighted to discuss how my background aligns with your needs. Please feel free to contact me at your earliest convenience.
+
+Thank you for your consideration.
+
+Best regards,
+[Your Name]`
+            },
+            cto: {
+                name: "CTO/Tech Lead",
+                templates: (name, purpose) => `Hi ${name},
+
+I hope you're having a great day. I'm reaching out regarding ${purpose} and thought your expertise would be invaluable.
+
+Your technical vision and leadership have been instrumental in [specific achievement]. I believe there's a unique opportunity for collaboration that could drive mutual growth.
+
+Would you be open to a brief conversation about this? I'm available at your convenience.
+
+Looking forward to connecting.
+
+Best,
+[Your Name]`
+            },
+            investor: {
+                name: "Investor/VC",
+                templates: (name, purpose) => `Dear ${name},
+
+I hope this email finds you well. I am reaching out regarding ${purpose} - a promising opportunity in [industry/sector].
+
+Our team has developed a compelling value proposition that addresses a significant market gap, with strong potential for growth and ROI.
+
+I would appreciate the opportunity to share our vision and discuss how this aligns with your investment thesis.
+
+Would you have time for a brief call in the coming weeks?
+
+Best regards,
+[Your Name]`
+            },
+            client: {
+                name: "Business Client",
+                templates: (name, purpose) => `Dear ${name},
+
+I trust this message finds you well. I wanted to reach out regarding ${purpose}.
+
+I've been impressed by [company name]'s commitment to [specific value/goal], and I believe we can provide substantial value through [your offering].
+
+Rather than a lengthy discussion, I'd like to schedule a brief exploratory call to understand your needs and share how we might help.
+
+Are you open to a 20-minute conversation?
+
+Best regards,
+[Your Name]`
+            },
+            vendor: {
+                name: "Vendor/Supplier",
+                templates: (name, purpose) => `Dear ${name},
+
+I hope you're well. I am writing regarding ${purpose} and our mutual business interests.
+
+Our organization is always seeking partnerships with reliable, innovative suppliers who share our commitment to quality and excellence.
+
+I would like to explore potential collaboration opportunities. Would you be available for a brief discussion?
+
+Thank you, and I look forward to connecting.
+
+Best regards,
+[Your Name]`
+            },
+            media: {
+                name: "Media/Press",
+                templates: (name, purpose) => `Dear ${name}/Media Team,
+
+I hope this finds you well. I am reaching out regarding ${purpose} - a story that I believe your readers/audience would find compelling.
+
+[Brief description of newsworthy angle]. This represents a significant development in [industry/field] that aligns with your editorial interests.
+
+Would you be interested in learning more? I'm happy to arrange an interview or provide additional information.
+
+Best regards,
+[Your Name]`
+            }
+        };
+
+        // Load category template
+        function loadCategoryTemplate() {
+            const category = document.getElementById('emailCategory').value;
+            if (category) {
+                const template = emailTemplates[category];
+                document.getElementById('composedEmail').innerHTML = `
+                    <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;">Template for: <strong>${template.name}</strong></p>
+                `;
+            }
+        }
+
+        // Generate email from category
+        function generateCategoryEmail() {
+            const category = document.getElementById('emailCategory').value;
+            const recipientName = document.getElementById('recipientName').value.trim();
+            const purpose = document.getElementById('composePurpose').value.trim();
+
+            if (!category) {
+                showMessage('composeMsg', 'Please select a category', 'error');
+                return;
+            }
+
+            if (!recipientName || !purpose) {
+                showMessage('composeMsg', 'Please fill in all fields', 'error');
+                return;
+            }
+
+            const template = emailTemplates[category];
+            const generatedEmail = template.templates(recipientName, purpose);
+
+            document.getElementById('composedEmail').innerHTML = `
+                <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;">📧 Generated for: <strong>${template.name}</strong></p>
+                <div style="background: #f9f9f9; padding: 15px; border-left: 4px solid #667eea; border-radius: 4px; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.95em; line-height: 1.6;">
+${escapeHtml(generatedEmail)}
+                </div>
+                <button class="btn-primary" style="margin-top: 15px;" onclick="copyComposedEmail('${escapeHtml(generatedEmail).replace(/'/g, "\\'")}')">📋 Copy Email</button>
+            `;
+            document.getElementById('composedEmail').style.display = 'block';
+            showMessage('composeMsg', 'Email generated successfully!', 'success');
+        }
+
+        // Copy composed email
+        function copyComposedEmail(emailText) {
+            const decodedText = emailText.replace(/&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+            navigator.clipboard.writeText(decodedText).then(() => {
+                showMessage('composeMsg', '✅ Email copied to clipboard!', 'success');
+            }).catch(() => {
+                showMessage('composeMsg', 'Failed to copy email', 'error');
+            });
         }
 
         // Copy draft to send section
