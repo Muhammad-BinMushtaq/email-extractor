@@ -44,3 +44,7 @@ temp/
 # API Keys (security)
 secrets.json
 credentials.json
+
+# Application data
+saved_emails/
+*.backup
