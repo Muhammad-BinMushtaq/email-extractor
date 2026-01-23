@@ -59,6 +59,18 @@ function switchTab(tab, event) {
 
 ---
 
+## CodeQL Findings
+
+### False Positives
+
+**Finding**: Missing rate limiting on route handler performing file system access
+- **Location**: `test.js:153-155`
+- **Route**: `GET /`
+- **Assessment**: False positive - This route serves the static `index.html` file. Rate limiting is not required for serving the main page as it's a standard web page request that should be fast and available.
+- **Action**: No fix required
+
+---
+
 ## Security Best Practices to Implement
 
 1. **Authentication & Authorization**
